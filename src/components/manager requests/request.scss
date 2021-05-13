@@ -1,0 +1,26 @@
+$card-header-color: #d3d3d3 ;
+.table{
+    &>:not(caption)>*>*{
+        padding: 0.45rem 0.1rem !important;
+        
+        }
+        &>:not(:last-child)>:last-child>*{
+            border-bottom-color: var(    --bs-table-active-bg) !important;
+            padding: 15px 3px !important;
+        }
+        thead{
+            tr{
+                background-color: $card-header-color;
+                th{
+                    font-size: 0.82rem;
+                   
+                }
+            }
+        }
+      
+    
+    td{
+        font-size: 0.78rem !important;
+        font-weight: 600 !important;
+    }
+}

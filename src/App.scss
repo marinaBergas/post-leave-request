@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,15 @@
   to {
     transform: rotate(360deg);
   }
+} */
+fieldset{
+  border-width: 2px !important;
+  border-style: groove !important;
+
+  border-image: initial !important;
+}
+legend{
+  float: none !important; 
+  width: auto !important; 
+
 }

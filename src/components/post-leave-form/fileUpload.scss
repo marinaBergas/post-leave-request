@@ -1,0 +1,36 @@
+$info-color :#24298E;
+.input-group{
+    .form-control
+    {
+      
+      border:none;
+      margin-bottom:0px;
+     
+      border: 1px solid #ddd ;
+    
+      box-shadow: none;
+    }
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        transform: scale(-1, 1);
+        color: $info-color;
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+}
+
+
+
+.info-text{
+color: $info-color;
+}

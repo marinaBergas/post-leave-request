@@ -1,0 +1,118 @@
+{
+  "employees": [
+    {
+      "id": "983",
+      "employeeName": "Laura Anne Eggleton",
+      "code": "1001",
+      "jobTitle": "General Manager",
+      "salaryProfile": "General Manage",
+      "expectedLeavingDate": "09/03/2021",
+      "expectedRejoiningDate": "15/03/2021",
+      "actualLeave": "",
+      "stLeaveType": "Annual Leave With Payroll"
+    },
+    {
+      "id": "836",
+      "employeeName": "Amaila prasadini jayamanne",
+      "code": "1030",
+      "jobTitle": "Assistant Manager Of Finance ",
+      "salaryProfile": "Management",
+      "expectedLeavingDate": "09/11/2020",
+      "expectedRejoiningDate": "10/11/2020",
+      "actualLeave": "",
+      "stLeaveType": "Sick Leave"
+    },
+    {
+      "id": "831",
+      "employeeName": "Amaila prasadini jayamanne",
+      "code": "1030",
+      "jobTitle": "Assistant Manager Of Finance ",
+      "salaryProfile": "Management",
+      "expectedLeavingDate": "08/11/2020",
+      "expectedRejoiningDate": "09/11/2020",
+      "actualLeave": "08/11/2020",
+      "stLeaveType": "Sick Leave"
+    },
+    {
+      "id": "747",
+      "employeeName": "Laura Anne Eggleton",
+      "code": "1001",
+      "jobTitle": "General Manager",
+      "salaryProfile": "General Manage",
+      "expectedLeavingDate": "02/11/2020",
+      "expectedRejoiningDate": "03/11/2020",
+      "actualLeave": "",
+      "stLeaveType": "Annual Leave With Payroll"
+    },
+    {
+      "id": "741",
+      "employeeName": "Neetu Shamlal Sajnani Shamlal Gobindram Sajnani",
+      "code": "1006",
+      "jobTitle": "Director of Finance & Business",
+      "salaryProfile": "Executive Comm",
+      "expectedLeavingDate": "02/02/2021",
+      "expectedRejoiningDate": "03/02/2021",
+      "actualLeave": "",
+      "stLeaveType": "Annual Leave With Payroll"
+    },
+    {
+      "id": "688",
+      "employeeName": "Amaila Udana Karunaratne",
+      "code": "1009",
+      "jobTitle": "Technology Manger ",
+      "salaryProfile": "HOD",
+      "expectedLeavingDate": "27/10/2020",
+      "expectedRejoiningDate": "28/10/2020",
+      "actualLeave": "",
+      "stLeaveType": "Sick Leave"
+    },
+    {
+      "id": "681",
+      "employeeName": "Amaila Udana Karunaratne",
+      "code": "1009",
+      "jobTitle": "Technology Manger ",
+      "salaryProfile": "HOD",
+      "expectedLeavingDate": "17/11/2020",
+      "expectedRejoiningDate": "18/11/2020",
+      "actualLeave": "",
+      "stLeaveType": "Sick Leave"
+    },
+    {
+      "id": "676",
+      "employeeName": "Amaila Udana Karunaratne",
+      "code": "1009",
+      "jobTitle": "Technology Manger ",
+      "salaryProfile": "HOD",
+      "expectedLeavingDate": "04/11/2020",
+      "expectedRejoiningDate": "05/11/2020",
+      "actualLeave": "",
+      "stLeaveType": "Annual Leave With Payroll"
+    },
+    {
+      "id": "674",
+      "employeeName": "Amaila Udana Karunaratne",
+      "code": "1009",
+      "jobTitle": "Technology Manger ",
+      "salaryProfile": "HOD",
+      "expectedLeavingDate": "14/10/2020",
+      "expectedRejoiningDate": "15/10/2020",
+      "actualLeave": "14/10/2020",
+      "stLeaveType": "Annual Leave With Payroll"
+    },
+    {
+      "id": "667",
+      "employeeName": "Laura Anne Eggleton",
+      "code": "1001",
+      "jobTitle": "General Manager",
+      "salaryProfile": "General Manage",
+      "expectedLeavingDate": "27/10/2020",
+      "expectedRejoiningDate": "01/11/2020",
+      "actualLeave": "27/10/2020",
+      "stLeaveType": "Annual Leave With Payroll"
+    }
+   
+    
+   
+ 
+  ]
+}

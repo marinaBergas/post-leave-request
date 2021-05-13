@@ -1,0 +1,30 @@
+$card-header-color: #d3d3d3 ;
+.annual-card{
+    background-color: $card-header-color !important;
+    .annual-leave-head{
+        font-size: 0.9rem !important;
+    }
+    .card-body{
+        .annual-leave-subtitle {
+            font-size: 0.8rem !important;
+            font-weight: 400;
+            position: relative;
+            &::after{
+                content: "";
+                border: 0.08em solid rgb(241, 241, 241);
+                position: absolute;
+                bottom: 0%;
+                right: 0%;
+                transform: translate(-10%,50%);
+                width: 80%;
+              opacity: 0.8;
+                border-radius: 100%;
+                
+            }
+        }
+        .annual-leave-subtitle-tw{
+            font-size: 0.8rem !important;
+            font-weight: 400;
+        }
+    }
+}
