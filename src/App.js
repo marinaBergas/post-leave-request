@@ -2,7 +2,8 @@ import {BrowserRouter as Router, Switch,Route } from 'react-router-dom';
 
 import './App.scss';
 import Home from './components/home/Home';
-import Requests from './components/manager requests/Requests';
+import requestsPage from './components/requests page/requestsPage';
+
 
 
 function App() {
@@ -11,10 +12,10 @@ function App() {
       <Router>
       <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/table" exact component={Requests} />
-            </Switch>
+            <Route path="/table" exact component={requestsPage} />
+      </Switch>
           
-          </Router>
+      </Router>
     </div>
   );
 }

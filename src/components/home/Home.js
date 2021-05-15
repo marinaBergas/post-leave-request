@@ -1,16 +1,32 @@
-import React from 'react'
-import AnnualLeave from '../annual leave/AnnualLeave'
-import PostLeaveForm from '../post-leave-form/Form'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentEmployee } from '../../redux/Employee.action';
+import AnnualLeave from '../annual leave/AnnualLeave';
+import HomeSearch from '../datatable/home-search/HomeSearch';
+import EmployeeInformation from '../employee search information/EmployeeInformation';
+import PostLeaveForm from '../post-leave-form/Form';
+
 
 const Home = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        async function fetchData(){
+          const res =  await fetch('http://localhost:8000/employees')
+          const data = await res.json()
+            dispatch (setCurrentEmployee(data))
+        }
+        fetchData();
+      }, [])
     return (
         <div>
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-9">
+                    <div className="col-lg-9 col-xs-12">
+                        <HomeSearch/>
+                        <EmployeeInformation/>
                         <PostLeaveForm/>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-lg-3 col-xs-12">
                         <AnnualLeave/>
                     </div>
                 </div>

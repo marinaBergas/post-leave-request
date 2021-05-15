@@ -1,0 +1,32 @@
+.list-group{
+   position: absolute !important;
+   top: 30px;
+   left: 0%;
+ transform: translate(50%,0%);
+ width: 500px;
+ height: 10em;
+ line-height: 2em;
+ border: 1px solid #ccc;
+ padding: 0;
+ margin: 0;
+ overflow: scroll;
+ overflow-x: hidden;
+
+}
+::-webkit-search-cancel-button {
+  display: flex;
+}
+
+  .input-icons{
+   
+    position: relative;
+    .reload-icon{
+      position: absolute;
+      bottom: 0%;
+      right: 35%;
+       transform: translate(100%,-80%);
+     font-size: 1.3em;
+    }
+  
+ 
+}

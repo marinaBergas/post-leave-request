@@ -1,76 +1,92 @@
 import React, { useState } from "react";
-import { Form, FormGroup, Label, Input, Card, CardHeader, CardBody, CardText } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Card,
+  CardHeader,
+  CardBody,
+  CardText,
+} from "reactstrap";
 import { CgMathPlus } from "react-icons/cg";
-import { FaRegCalendarCheck } from 'react-icons/fa';
+import { FaRegCalendarCheck } from "react-icons/fa";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
-
-import './form.scss'
+import "./form.scss";
 import FileUploadRe from "./FileUpload";
 import { useHistory } from "react-router";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentEmployee } from "../../redux/Employee.action";
 
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
-
 });
 const PostLeaveForm = (props) => {
-  // const {  currentEmployee } = useSelector(mapState);
+  const { currentEmployee } = useSelector(mapState);
   const dispatch = useDispatch();
-  const [employeeName, setEmployeeName] = useState('');
-  const [jobTitle, setJobTitle] = useState('');
-  const [salaryProfile, setSalaryProfile] = useState('');
-  const [expectedLeavingDate, setExpectedLeavingDate] = useState('');
-  const [expectedRejoiningDate, setExpectedRejoiningDate] = useState('');
-  const [stLeaveType, setStLeaveType] = useState('');
+  const [name, setname] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [salaryProfile, setSalaryProfile] = useState("");
+  const [expectedLeavingDate, setExpectedLeavingDate] = useState("");
+  const [expectedRejoiningDate, setExpectedRejoiningDate] = useState("");
+  const [stLeaveType, setStLeaveType] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState("");
+  const [expectedEndDate, setExpectedEndDate] = useState("");
   const history = useHistory();
   const handlePush = () => {
     history.push("/table");
-  }
+  };
   const addEmployee = async (employee) => {
-    const res = await fetch('http://localhost:8000/employees', {
-      method: 'POST',
+    const res = await fetch("http://localhost:8000/employees", {
+      method: "POST",
       headers: {
-        'Content-type': 'application/json'
+        "Content-type": "application/json",
       },
-      body: JSON.stringify(employee)
-    })
- 
+      body: JSON.stringify(employee),
+    });
+
     const data = await res.json();
-      //setTasks([...tasks,data])
-     // const id = Math.floor(Math.random()*10000)+1
-     // const newTask={id,...task}
-     // setTasks([...tasks,newTask])
-  }
+    //setTasks([...tasks,data])
+    // const id = Math.floor(Math.random()*10000)+1
+    // const newTask={id,...task}
+    // setTasks([...tasks,newTask])
+  };
   const onSubmit = (e) => {
-     e.preventDefault()
-
-    addEmployee({ 
-      employeeName, 
-      jobTitle, 
-      salaryProfile, 
+    e.preventDefault()
+ 
+    addEmployee({
+      name,
+      jobTitle,
+      salaryProfile,
       expectedLeavingDate,
-       expectedRejoiningDate,
-         stLeaveType 
-        })
-    setEmployeeName('')
-    setJobTitle('')
-    setSalaryProfile('')
-    setExpectedLeavingDate('')
-    setExpectedRejoiningDate('')
-    setStLeaveType('')
-  }
- const handleSubmit=(e)=>{
-  onSubmit(e);
- }
+      expectedRejoiningDate,
+      stLeaveType,
+    });
+    setname("");
+    setJobTitle("");
+    setSalaryProfile("");
+    setExpectedLeavingDate("");
+    setExpectedRejoiningDate("");
+    setStLeaveType("");
+  };
+ 
 
+  const handleSubmit = () => {
+   alert("form not vaild")
+  };
 
   return (
-
-    <FormGroup tag="fieldset" className="m-3 p-3 text-muted" >
-      <div className="container-fluid  text-muted " >
-        <Form className="row " onSubmit={onSubmit} >
-          <FormGroup tag="fieldset" className="pb-5 pt-3" >
+    <FormGroup tag="fieldset" className="m-1 p-1 text-muted">
+      <div className="container-fluid  text-muted p-1 m-0">
+        <ValidatorForm
+          onSubmit={handleSubmit}
+          onError={(errors) => console.log("errors",errors)}
+          className="p-0 m-0"
+        >
+          <FormGroup tag="fieldset" className="pb-5 pt-3">
             <legend className="text-capitalize text-right m-0 p-0 text-body ">
               leave details
             </legend>
@@ -78,14 +94,13 @@ const PostLeaveForm = (props) => {
               <label className="col-md-3 text-capitalize text-leave-right align-self-center">
                 leave to avail
               </label>
-              <div className="col-md-6 text-capitalize h6 ">
-                <FormGroup check >
+              <div className="col-md-6 col-xs-12 text-capitalize h6 ">
+                <FormGroup check>
                   <Label check className="text-radio ">
                     <Input
                       type="radio"
                       name="radio1"
                       className="text-capitalize "
-                      
                     />{" "}
                     abroad
                   </Label>
@@ -129,64 +144,92 @@ const PostLeaveForm = (props) => {
             <div className="row expected-leave-text p-0 mx-2 py-2">
               <label className="col-md-3 text-capitalize text-leave-right align-self-center">
                 expected leaving date
-            </label>
+              </label>
               <div className="col-md-3 text-capitalize ">
-                <FormGroup className="date-input d-flex align-items-center ">
-                  <Input
+             
+                  <TextValidator
                     name=" expectedLeavingDate"
-                    id="exampleDate"
+                    id="expectedLeavingDate"
                     type="date"
                     placeholder="05/06/2021"
-                    className="text-muted"
-                    onChange={(e)=>setExpectedLeavingDate(e.target.value)}
+                    className="text-muted  "
+                    onChange={(e) => setExpectedLeavingDate(e.target.value)}
+                    value={expectedLeavingDate}
+                    validators={["required"]}
+                    errorMessages={["this field is required"]}
                   />
-                </FormGroup>
+              
               </div>
               <label className="col-md-3 text-capitalize text-leave-right align-self-center">
                 expected rejoining date
-            </label>
+              </label>
               <div className="col-md-3 text-capitalize ">
-                <FormGroup className="date-input d-flex align-items-center  " >
-                  <Input
-                    name=" expectedRejoiningDate"
-                    id="exampleDate"
-                    type="date"
-                    placeholder=" "
-                    className="text-muted"
-                    onChange={(e)=>setExpectedRejoiningDate(e.target.value)}
-                  />
-                </FormGroup>
+                
+                      <TextValidator
+                        onChange={(e) => setExpectedRejoiningDate(e.target.value)}
+                        name=" expectedRejoiningDate"
+                        id="expectedRejoiningDate"
+                        type="date"
+                         placeholder=" "
+                         className="text-muted"
+                        value={expectedRejoiningDate}
+                        validators={["required"]}
+                        errorMessages={[
+                          "this field is required"
+                        ]}
+                        className="  text-muted"
+                      />
+               
               </div>
             </div>
             <div className="row px-0  py-2 ">
               <label className="col-md-3 text-capitalize text-leave-right align-self-center">
                 expected end date
-            </label>
+              </label>
             </div>
             <div className="row end-date mx-2 py-2 ">
               <label className="col-md-2 text-capitalize text-leave-right align-self-center">
                 1st leave type
-            </label>
+              </label>
               <div className="col-md-3 text-capitalize text-muted">
-                <select id="exampleSelect" className="form-select text-muted" name="stLeaveType" onChange={(e)=>setStLeaveType(e.target.value)}>
-                  <option className="text-capitalize" >--Please select leave type--</option>
-                  <option className="text-capitalize">annual leave with payroll</option>
+                <select
+                  id="stLeaveType"
+                  className="form-select text-muted"
+                  name="stLeaveType"
+                  onChange={(e) => setStLeaveType(e.target.value)}
+                >
+                  <option className="text-capitalize">
+                    --Please select leave type--
+                  </option>
+                  <option className="text-capitalize">
+                    annual leave with payroll
+                  </option>
                   <option className="text-capitalize">sick leave</option>
-                  <option className="text-capitalize">annual leave during reserve</option>
-
+                  <option className="text-capitalize">
+                    annual leave during reserve
+                  </option>
                 </select>
               </div>
               <label className="col-md-4 text-capitalize text-leave-right align-self-center">
                 no. of days
-            </label>
-              <div className="col-md-1 text-capitalize  ">
-                <Input
-                  name="expectedEndDate"
-                  id="text"
-                  type="text"
-                  placeholder="Enter numb "
-                  className="daysNum  text-center "
-                />
+              </label>
+              <div className="col-md-2 text-capitalize  ">
+            
+                   <TextValidator
+                        onChange={(e) => setExpectedEndDate(e.target.value)}
+                        name="expectedEndDate"
+                        id="expectedEndDate"
+                        type="text"
+                        placeholder="Enter numb "
+                        className="daysNum  text-center "
+                        
+                        value={expectedEndDate}
+                        validators={["required"]}
+                        errorMessages={[
+                          "this field is required"
+                        ]}
+                        className=" "
+                      />
               </div>
             </div>
             <div className="row justify-content-center text-center px-0 mx-2 pb-2">
@@ -196,12 +239,8 @@ const PostLeaveForm = (props) => {
             </div>
             <div className="row justify-content-center py-1 px-0 mx-2">
               <div className="col-md-12 text-total-days align-self-center text-center  ml-5">
-
                 <FaRegCalendarCheck className="h6" />
-                <label className=" text-capitalize px-1 ">
-                  total days
-              </label>
-
+                <label className=" text-capitalize px-1 ">total days</label>
               </div>
             </div>
             <div className="row px-0  py-2 mx-3 ">
@@ -211,13 +250,18 @@ const PostLeaveForm = (props) => {
                     <h5>Guarantor</h5>
                   </CardHeader>
                   <CardBody>
-                    <CardText> <select id="exampleSelect" className="form-select text-muted bg-white">
-                      <option >Select an option</option>
-                      <option >2</option>
-                      <option >3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                    <CardText>
+                      {" "}
+                      <select
+                        id="GuarantorSelect"
+                        className="form-select text-muted bg-white"
+                      >
+                        <option>Select an option</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
                     </CardText>
                   </CardBody>
                 </Card>
@@ -228,13 +272,19 @@ const PostLeaveForm = (props) => {
                     <h5>Replacement</h5>
                   </CardHeader>
                   <CardBody>
-                    <CardText> <select id="exampleSelect" className="form-select text-muted bg-white">
-                      <option >Select an option</option>
-                      <option >2</option>
-                      <option >3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
+                    <CardText>
+                      {" "}
+                      <select
+                        id="option"
+                        className="form-select text-muted bg-white"
+                        
+                      >
+                        <option>Select an option</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
                     </CardText>
                   </CardBody>
                 </Card>
@@ -247,50 +297,63 @@ const PostLeaveForm = (props) => {
                 </CardHeader>
                 <CardBody>
                   <div className="row py-3 px-0 mx-2">
-
                     <label className="col-md-2 text-capitalize text-leave-right align-self-center">
                       address
                     </label>
                     <div className="col-md-4 text-capitalize ">
-                      <FormGroup className="date-input d-flex align-items-center ">
-                        <Input
-                          name="date"
-                          id="exampleDate"
-                          type="text"
-                          placeholder=" "
-                          className="text-muted"
-                        />
-                      </FormGroup>
+
+                         <TextValidator
+                        onChange={(e) => setAddress(e.target.value)}
+                         name="text"
+                         id="address"
+                         type="text"
+                         placeholder=" "
+                         className="text-muted"
+                        value={address}
+                        validators={["required"]}
+                        errorMessages={[
+                          "this field is required"
+                        ]}
+                        className=" "
+                      />
                     </div>
                     <label className="col-md-2 text-capitalize text-leave-right align-self-center">
                       contact no.
-            </label>
+                    </label>
                     <div className="col-md-4 text-capitalize ">
-                      <FormGroup className="date-input d-flex align-items-center ">
-                        <Input
-                          name="date"
-                          id="exampleDate"
-                          type="text"
-                          placeholder=" "
-                          className="text-muted"
-                        />
-                      </FormGroup>
+                     <TextValidator
+                        onChange={(e) => setContact(e.target.value)}
+                         name="text"
+                         id="contact"
+                         type="text"
+                         placeholder=" "
+                         className="text-muted"
+                        value={contact}
+                        validators={["required"]}
+                        errorMessages={[
+                          "this field is required"
+                        ]}
+                        className=" "
+                      />
                     </div>
                   </div>
                   <div className="row py-3 px-0 mx-2">
                     <label className="col-md-2 text-capitalize text-leave-right align-self-center">
                       email
-                </label>
+                    </label>
                     <div className="col-md-4 text-capitalize ">
-                      <FormGroup className="date-input d-flex align-items-center ">
-                        <Input
-                          name="date"
-                          id="exampleDate"
-                          type="text"
-                          placeholder=" "
-                          className="text-muted"
-                        />
-                      </FormGroup>
+                      <TextValidator
+                      id="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        name="email"
+                        value={email}
+                        validators={["required", "isEmail"]}
+                        errorMessages={[
+                          "this field is required",
+                          "email is not valid",
+                        ]}
+                        className=" "
+                      />
                     </div>
                   </div>
                 </CardBody>
@@ -305,7 +368,14 @@ const PostLeaveForm = (props) => {
                 </CardHeader>
                 <CardBody>
                   <CardText>
-                    <textarea id="w3review" name="w3review" rows="4" cols="50" className="border-secondary"></textarea>
+                    <textarea
+                      id="Remarks"
+                      name="w3review"
+                      rows="4"
+                      cols="50"
+                      
+                      style={{ width: "100%" }}
+                    ></textarea>
                   </CardText>
                 </CardBody>
               </Card>
@@ -325,18 +395,19 @@ const PostLeaveForm = (props) => {
             <div className="col-md-4">
               <div className="btn cancel-btn text-secondary mx-2 px-2">
                 Cancel
-            </div>
-              <div className="btn submit-btn mx-2 " onClick={handleSubmit} >
+              </div>
+             <button
+                className="btn submit-btn mx-2 "
+                type="submit"
+                onClick={onSubmit}
+              >
                 Submit
+              </button>
             </div>
-            </div>
-
           </div>
 
-
-
-          <button onClick={handlePush} >go to table</button>
-        </Form>
+          <button onClick={handlePush}>go to table</button>
+        </ValidatorForm>
       </div>
     </FormGroup>
   );
