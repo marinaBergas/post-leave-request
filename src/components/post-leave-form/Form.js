@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Form,
   FormGroup,
@@ -18,6 +18,7 @@ import FileUploadRe from "./FileUpload";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentEmployee } from "../../redux/Employee.action";
+import { useForkRef } from "@material-ui/core";
 
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
@@ -31,10 +32,19 @@ const PostLeaveForm = (props) => {
   const [expectedLeavingDate, setExpectedLeavingDate] = useState("");
   const [expectedRejoiningDate, setExpectedRejoiningDate] = useState("");
   const [stLeaveType, setStLeaveType] = useState("");
+  const [guarantorState, setGuarantorState] = useState("");
+  const [replacement, setReplacement] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
   const [expectedEndDate, setExpectedEndDate] = useState("");
+  const [fields ,setFields ]=useState({})
+  const [errors, setErrors] = useState({})
+  const inputRef = useForkRef();
+  // const FORM_ERRORS={ "leaveType":"",
+  // "replacement":"",
+  // "guarantor":"",}
+  // const [errors , seErrors ] = useState(FORM_ERRORS);
   const history = useHistory();
   const handlePush = () => {
     history.push("/table");
@@ -54,7 +64,31 @@ const PostLeaveForm = (props) => {
     // const newTask={id,...task}
     // setTasks([...tasks,newTask])
   };
+  const handleValidation=()=>{
+    console.log("fields",fields["guarantor"])
+    let formIsValid = true;
+    
+    if(fields["guarantor"]==undefined){
+      formIsValid = false;
+      console.log("jhh")
+      errors["Guarantor"] = "Cannot be empty";
+      setErrors({errors})
+   }else{
+    formIsValid = true;
+   }
+   return formIsValid;
+  }
   const onSubmit = (e) => {
+    // const isValid=validateFrom();
+    if(handleValidation()){
+      alert("Form submitted");
+   }else{
+      alert("Form has errors.")
+   }
+    // console.log("isValidm",isValidm)
+    if(handleValidation()){
+
+    
     e.preventDefault()
  
     addEmployee({
@@ -64,6 +98,7 @@ const PostLeaveForm = (props) => {
       expectedLeavingDate,
       expectedRejoiningDate,
       stLeaveType,
+      address
     });
     setname("");
     setJobTitle("");
@@ -71,14 +106,105 @@ const PostLeaveForm = (props) => {
     setExpectedLeavingDate("");
     setExpectedRejoiningDate("");
     setStLeaveType("");
+    setAddress("");
+  history.push("/table");
+
+  }
   };
- 
+
 
   const handleSubmit = () => {
    alert("form not vaild")
+   // check  form data vliadation
+   //save current employee
+    // const isValid=validateFrom();
+  //  const isValidm=validateFromm();
+  //  console.log("isvalid:",isValid)
   };
+// const validateFrom=() => {
 
-  return (
+//   let isValid=validateleaveTypeSelector(stLeaveType,"leaveType","--Please select leave type--");
+  
+//   if(isValid&& 
+//     expectedLeavingDate&&
+//     expectedRejoiningDate){
+//       return true;
+//     }
+//   return false;
+// }
+// const validateFromm=() => {
+ 
+
+//   let isValidm=validateGuarantorSelector(guarantorState,"guarantor","select an option");
+//   console.log("before",isValidm)
+
+//   if(isValidm&& 
+//     expectedLeavingDate&&
+//     expectedRejoiningDate){
+//       return true;
+//     }
+//   return false;
+//   console.log("after",isValidm)
+// }
+// const validateleaveTypeSelector=(selectorValue,errorName,initialValue)=>{
+//   const errorObject=formErrors;
+//   if(!selectorValue||selectorValue==initialValue){
+//   const leaveType="This Field Is Required";
+//     setFormErrors({leaveType,guarantor:errorObject.guarantor,replacement:errorObject.replacement});
+//   }
+//   else{
+//     errorObject[errorName]="";
+//   }
+//   console.log("errorObject[errorName]",errorObject[errorName])
+//   return errorObject[errorName].length=="";
+// }
+// const validateReplacementSelector=(selectorValue,errorName,initialValue)=>{
+//   console.log("selectorValue:",selectorValue  )
+//   const errorObject=formErrors;
+//   if(!selectorValue||selectorValue==initialValue){
+//   const replacement="This Field Is Required";
+//     setFormErrors({replacement,leaveType:errorObject.leaveType,guarantor:errorObject.guarantor});
+//   }
+//   else{
+//     errorObject[errorName]="";
+//   }
+//   //setFormErrors(errorObject);
+//   console.log("errorObject",errorObject)
+//   return errorObject[errorName].length>0;
+// }
+// const validateGuarantorSelector=(selectorValue,errorName,initialValue)=>{
+
+//   const errorObjectGur=formErrors;
+//   if(!selectorValue||selectorValue==initialValue){
+//   const guarantor="This Field Is Required";
+//   console.log("guarantor:",guarantor  )
+//     setFormErrors({guarantor,leaveType:errorObjectGur.leaveType,replacement:errorObjectGur.replacement});
+
+//   }
+//   else{
+    
+//     errorObjectGur[errorName]="";
+//   }
+//   //setFormErrors(errorObjectGur);
+//   return errorObjectGur[errorName].length>0;
+// }
+// const handleOnChangeLeaveType=(e)=>{
+//   setStLeaveType(e.currentTarget.value);
+//   let isValid=validateleaveTypeSelector(e.currentTarget.value,"leaveType","--Please select leave type--");
+// }
+// const handleOnChangeGuarantor=(e)=>{
+//   setGuarantorState(e.currentTarget.value);
+//   let isValid=validateGuarantorSelector(e.currentTarget.value,"guarantor","select an option");
+// }
+const handleOnChangeGuarantor=(event)=>{
+ 
+  fields["guarantor"]=(event.currentTarget.value);
+
+  setFields({fields})
+  console.log("fields",fields["guarantor"])
+  // let isValid=validateReplacementSelector(e.currentTarget.value,"replacement","select an option");
+}
+  return ( 
     <FormGroup tag="fieldset" className="m-1 p-1 text-muted">
       <div className="container-fluid  text-muted p-1 m-0">
         <ValidatorForm
@@ -91,7 +217,7 @@ const PostLeaveForm = (props) => {
               leave details
             </legend>
             <div className="row text-left text-leave p-0 mx-2 ">
-              <label className="col-md-3 text-capitalize text-leave-right align-self-center">
+              <label className="col-md-3 text-capitalize text-form-right align-self-center">
                 leave to avail
               </label>
               <div className="col-md-6 col-xs-12 text-capitalize h6 ">
@@ -117,7 +243,7 @@ const PostLeaveForm = (props) => {
             </div>
 
             <div className="row text-left text-leave p-0 mx-2 py-2  ">
-              <label className="col-md-3 text-capitalize text-leave-right align-self-center">
+              <label className="col-md-3 text-capitalize text-form-right align-self-center">
                 require leave salary advance
               </label>
               <div className="col-md-6 text-capitalize h6 ">
@@ -142,7 +268,7 @@ const PostLeaveForm = (props) => {
               </div>
             </div>
             <div className="row expected-leave-text p-0 mx-2 py-2">
-              <label className="col-md-3 text-capitalize text-leave-right align-self-center">
+              <label className="col-md-3 text-capitalize text-form-right align-self-center">
                 expected leaving date
               </label>
               <div className="col-md-3 text-capitalize ">
@@ -160,7 +286,7 @@ const PostLeaveForm = (props) => {
                   />
               
               </div>
-              <label className="col-md-3 text-capitalize text-leave-right align-self-center">
+              <label className="col-md-3 text-capitalize text-form-right align-self-center">
                 expected rejoining date
               </label>
               <div className="col-md-3 text-capitalize ">
@@ -183,12 +309,12 @@ const PostLeaveForm = (props) => {
               </div>
             </div>
             <div className="row px-0  py-2 ">
-              <label className="col-md-3 text-capitalize text-leave-right align-self-center">
+              <label className="col-md-3 text-capitalize text-form-right align-self-center">
                 expected end date
               </label>
             </div>
             <div className="row end-date mx-2 py-2 ">
-              <label className="col-md-2 text-capitalize text-leave-right align-self-center">
+              <label className="col-md-2 text-capitalize text-form-right align-self-center">
                 1st leave type
               </label>
               <div className="col-md-3 text-capitalize text-muted">
@@ -196,10 +322,10 @@ const PostLeaveForm = (props) => {
                   id="stLeaveType"
                   className="form-select text-muted"
                   name="stLeaveType"
-                  onChange={(e) => setStLeaveType(e.target.value)}
+                  // onChange={handleOnChangeLeaveType}
                 >
-                  <option className="text-capitalize">
-                    --Please select leave type--
+                   <option className="text-capitalize">
+                   --Please select leave type--
                   </option>
                   <option className="text-capitalize">
                     annual leave with payroll
@@ -209,8 +335,9 @@ const PostLeaveForm = (props) => {
                     annual leave during reserve
                   </option>
                 </select>
+                {/* {formErrors.leaveType && <span style={{color:"red"}}>{formErrors.leaveType}</span>} */}
               </div>
-              <label className="col-md-4 text-capitalize text-leave-right align-self-center">
+              <label className="col-md-4 text-capitalize text-form-right align-self-center">
                 no. of days
               </label>
               <div className="col-md-2 text-capitalize  ">
@@ -255,13 +382,17 @@ const PostLeaveForm = (props) => {
                       <select
                         id="GuarantorSelect"
                         className="form-select text-muted bg-white"
+                        ref={inputRef}
+                        onChange={handleOnChangeGuarantor} 
+                        value={setFields["Guarantor"]}
                       >
-                        <option>Select an option</option>
+                        <option>select an option</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
                       </select>
+                      {errors.guarantor&& <span style={{color:"red"}}>{errors.guarantor}hh</span>}
                     </CardText>
                   </CardBody>
                 </Card>
@@ -277,14 +408,15 @@ const PostLeaveForm = (props) => {
                       <select
                         id="option"
                         className="form-select text-muted bg-white"
-                        
+                        // onChange={handleOnChangeReplacement}
                       >
-                        <option>Select an option</option>
+                        <option>select an option</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
                         <option>5</option>
                       </select>
+                      {/* {formErrors.replacement && <span style={{color:"red"}}>{formErrors.replacement}hh</span>} */}
                     </CardText>
                   </CardBody>
                 </Card>
@@ -297,7 +429,7 @@ const PostLeaveForm = (props) => {
                 </CardHeader>
                 <CardBody>
                   <div className="row py-3 px-0 mx-2">
-                    <label className="col-md-2 text-capitalize text-leave-right align-self-center">
+                    <label className="col-md-2 text-capitalize text-form-right align-self-center">
                       address
                     </label>
                     <div className="col-md-4 text-capitalize ">
@@ -317,7 +449,7 @@ const PostLeaveForm = (props) => {
                         className=" "
                       />
                     </div>
-                    <label className="col-md-2 text-capitalize text-leave-right align-self-center">
+                    <label className="col-md-2 text-capitalize text-form-right align-self-center">
                       contact no.
                     </label>
                     <div className="col-md-4 text-capitalize ">
@@ -338,7 +470,7 @@ const PostLeaveForm = (props) => {
                     </div>
                   </div>
                   <div className="row py-3 px-0 mx-2">
-                    <label className="col-md-2 text-capitalize text-leave-right align-self-center">
+                    <label className="col-md-2 text-capitalize text-form-right align-self-center">
                       email
                     </label>
                     <div className="col-md-4 text-capitalize ">

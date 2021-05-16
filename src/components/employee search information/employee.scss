@@ -1,4 +1,7 @@
 $background-employeeinfo-color : #F1F1F3;
 .employInfo{
     background-color:$background-employeeinfo-color ;
+    .text-info-left {
+        text-align: right;
+    }
 }
