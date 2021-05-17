@@ -2,7 +2,7 @@ import employeeType from "./Employee.type"
 
 const INITIAL_STATE = {
     currentEmployee : [ ] ,
-    searchEmployee :{},
+    searchEmployee :'',
 }
 
 const employeeReducer  = (state=INITIAL_STATE,action)=>{

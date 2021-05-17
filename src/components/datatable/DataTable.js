@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import './dataTable.scss'
 import { setSearchEmployee } from '../../redux/Employee.action';
+import employeeImg from '../../assets/image/g1.jpg'
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
   searchEmployee: employee.searchEmployee,
@@ -24,22 +25,9 @@ export default function DataTable() {
   const ulIconRef = useRef();
   const inputRef = useRef();
   const [inputValue, setInputValue] = useState('');
-  // const useStyles = makeStyles({
-  //   option: {
-  //     fontSize: 15,
-  //     '& > span': {
-  //       marginRight: 10,
-  //       fontSize: 18,
-  //     },
-  //   },
-  // });
-  // const classes = useStyles();
-  const dispatch = useDispatch();
-  console.log("value",value,"inputValue",inputValue)
-  useEffect(() => {
-  //  dispatch ( setSearchEmployee(value));
 
-  }, [ ])
+  const dispatch = useDispatch();
+ 
 
   return (
     <div style={{ width: "70%" }}>
@@ -52,17 +40,22 @@ export default function DataTable() {
             setInputValue(newInputValue);
           }}
         id="free-solo-2-demo"
-        // classes={{
-        //   option: classes.option,
-        // }}
+        
         autoHighlight
         freeSolo
         options={currentEmployee}
         getOptionLabel={(option) =>`${option.code}|${option.name}|${option.jobTitle}`}
         renderOption={(option) => (
           <React.Fragment>
-            <p>{(option.code)}|{(option.name)}|{(option.jobTitle)}</p>
-            
+            <div className="row  align-items-center justify-content-center">
+              <div className="col-md-2">
+              <img src={employeeImg} alt="employee-image" className="w-100"/>
+              </div>
+              <div className="col-md-10">
+              <p>{(option.code)}|{(option.name)}|{(option.jobTitle)}</p>
+              </div>
+            </div>
+           
           </React.Fragment>
          
         )}

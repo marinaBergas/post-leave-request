@@ -26,6 +26,13 @@
       right: 35%;
        transform: translate(100%,-80%);
      font-size: 1.3em;
+     @media (max-width: 992px) {
+      .reload-icon{
+        position: absolute;
+        bottom: 0%;
+        right: 10%;
+         transform: translate(100%,-80%);
+      }}
     }
   
  

@@ -1,7 +1,37 @@
 $background-employeeinfo-color : #F1F1F3;
+$icon-arrow-color:#24298F;
 .employInfo{
     background-color:$background-employeeinfo-color ;
+    .employee-image{
+        border-right: 6px solid $icon-arrow-color;
+    }
+    .employee-details-title{
+        font-weight: 700;
+    }
     .text-info-left {
         text-align: right;
+        @media (max-width: 992px) {
+            text-align: left;
+        }
+    }
+    .employee-details{
+        font-size:0.82em;
+        font-weight: 500;
+    }
+    .arrow-icon{
+    color: $icon-arrow-color;
+    font-size: large;
+    display: flex;
+    align-items: center;
+    @media (max-width: 540px) {
+        font-size: small;
+    }
+    }
+    .employee-address{
+        font-size:0.82em;
+        font-weight: 700;
+        @media (max-width: 540px) {
+        font-size:0.7em;
+        font-weight: 400;}
     }
 }

@@ -1,26 +1,137 @@
 $card-header-color: #d3d3d3 ;
-.table{
-    &>:not(caption)>*>*{
-        padding: 0.45rem 0.1rem !important;
-        
-        }
-        &>:not(:last-child)>:last-child>*{
-            border-bottom-color: var(    --bs-table-active-bg) !important;
-            padding: 15px 3px !important;
-        }
-        thead{
-            tr{
-                background-color: $card-header-color;
-                th{
-                    font-size: 0.82rem;
-                   
+$request_initial_color :#0C61B9;
+$request_action_taken_color: #B04403 ;
+$request_under_approval_color:#DEA523;
+$request_finial_level_approval:#3C763D;
+
+.table-responsive{
+    .table{
+        &>:not(caption)>*>*{
+            padding: 0.45rem 0.1rem !important;
+            
+            }
+            &>:not(:last-child)>:last-child>*{
+                border-bottom-color: var(    --bs-table-active-bg) !important;
+                padding: 15px 3px !important;
+            }
+            thead{
+                tr{
+                    background-color: $card-header-color;
+                    th{
+                        font-size: 0.82rem;
+                       
+                    }
                 }
             }
+          
+        
+        td{
+            font-size: 0.78rem !important;
+            font-weight: 600 !important;
         }
-      
+        .request_initial{
+            border-left:10px solid $request_initial_color ;
+        }
+        .request_action_taken{
+            border-left:10px solid $request_action_taken_color ;
+        }
+        .request_under_approval{
+            border-left:10px solid $request_under_approval_color ;
+        }
+        .requests_color_under_approval{
+            border-left:10px solid $request_under_approval_color ;
+        }
+        .request_finial_level_approval{
+            border-left:10px solid $request_action_taken_color ;
+        }
     
-    td{
-        font-size: 0.78rem !important;
-        font-weight: 600 !important;
+        
+    }
+    
+    
+}
+@mixin table-request(){
+    content: " ";
+    height:  12px;
+    width:  12px;
+}
+.table-request{
+    .requests_color-col{
+        width: 11% !important;
+        @media (max-width:1200px) {
+            width: 15% !important;
+        }
+        @media (max-width:768px) {
+            width: 20% !important;
+        }
+        @media (max-width:576px) {
+            width: 30% !important;
+        }
+        @media (max-width:320px) {
+            width: 40% !important;
+        }
+    }
+    .requests_color-col_second{
+        width: 12% !important;
+        @media (max-width:1200px) {
+            width: 12% !important;
+        }
+        @media (max-width:992px) {
+            width: 20% !important;
+        }
+        @media (max-width:768px) {
+            width: 30% !important;
+        }
+    }
+    .requests_color-col_third{
+        width: 14% !important;
+        @media (max-width:1200px) {
+            width: 18% !important;
+        }
+        @media (max-width:992px) {
+            width: 22% !important;
+        }
+        @media (max-width:768px) {
+            width: 32% !important;
+        }
+    }
+    .requests_color-col_foruth{
+        width: 7% !important;
+        @media (max-width:1200px) {
+            width: 8% !important;
+        }
+        @media (max-width:992px) {
+            width: 10% !important;
+        }
+        @media (max-width:768px) {
+            width: 25% !important;
+        }
+    }
+    
+    .table-request-col{
+        .requests-type{
+            font-size: 0.7em;
+            font-weight: 700;
+        }  
+        .requests_color_initial{
+            @include table-request();
+            border-left: 12px solid $request_initial_color;
+          }
+          .requests_color_action_taken{
+            @include table-request();
+              border-left: 12px solid $request_action_taken_color;
+          }
+          .requests_color_under_approval{
+            @include table-request();
+            border-left: 12px solid $request_under_approval_color;
+          }
+          .requests_color_finial_approve{
+            @include table-request();
+            border-left: 12px solid $request_finial_level_approval;
+          }
+          .requests_color_taken{
+            @include table-request();
+            border-left: 12px solid $request_action_taken_color;
+          }
     }
 }
