@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Form,
   FormGroup,
@@ -12,13 +12,14 @@ import {
 import { CgMathPlus } from "react-icons/cg";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
+import Validation from "./Validation";
 import "./form.scss";
 import FileUploadRe from "./FileUpload";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentEmployee } from "../../redux/Employee.action";
 import { useForkRef } from "@material-ui/core";
+
 
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
@@ -32,25 +33,24 @@ const PostLeaveForm = (props) => {
   const [expectedLeavingDate, setExpectedLeavingDate] = useState("");
   const [expectedRejoiningDate, setExpectedRejoiningDate] = useState("");
   const [stLeaveType, setStLeaveType] = useState("");
-  const [guarantorState, setGuarantorState] = useState("");
-  const [replacement, setReplacement] = useState("");
+  // const [guarantorState, setGuarantorState] = useState("");
+  // const [replacement, setReplacement] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
   const [expectedEndDate, setExpectedEndDate] = useState("");
-  const [fields ,setFields ]=useState({})
   const [errors, setErrors] = useState({})
+  const [values, setValues] = useState('');
+  const [isSubmmitting, setIsSubmmitting] = useState(false)
+  
   const inputRef = useForkRef();
-  // const FORM_ERRORS={ "leaveType":"",
-  // "replacement":"",
-  // "guarantor":"",}
-  // const [errors , seErrors ] = useState(FORM_ERRORS);
+
   const history = useHistory();
   const handlePush = () => {
     history.push("/table");
   };
   const addEmployee = async (employee) => {
-    const res = await fetch("http://localhost:8000/employees", {
+    const response = await fetch("http://localhost:8000/employees", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -58,39 +58,28 @@ const PostLeaveForm = (props) => {
       body: JSON.stringify(employee),
     });
 
-    const data = await res.json();
-    //setTasks([...tasks,data])
-    // const id = Math.floor(Math.random()*10000)+1
-    // const newTask={id,...task}
-    // setTasks([...tasks,newTask])
-  };
-  const handleValidation=()=>{
-    console.log("fields",fields["guarantor"])
-    let formIsValid = true;
-    
-    if(fields["guarantor"]==undefined){
-      formIsValid = false;
-      console.log("jhh")
-      errors["Guarantor"] = "Cannot be empty";
-      setErrors({errors})
-   }else{
-    formIsValid = true;
-   }
-   return formIsValid;
-  }
-  const onSubmit = (e) => {
-    // const isValid=validateFrom();
-    if(handleValidation()){
-      alert("Form submitted");
-   }else{
-      alert("Form has errors.")
-   }
-    // console.log("isValidm",isValidm)
-    if(handleValidation()){
+    // const data = await res.json();
 
-    
-    e.preventDefault()
- 
+  };
+  
+  const onSubmit = (e) => {
+   
+setErrors(Validation(values));
+setIsSubmmitting(true);
+
+if(Object.keys(Validation(values)).length===0&& 
+  expectedLeavingDate&&
+   expectedRejoiningDate&&expectedEndDate&&address)
+{
+const {
+  
+  radio1,
+  radio2,
+  stLeaveType,
+  GuarantorSelect,
+  Replacement,Remarks,Attchments
+} = values;
+
     addEmployee({
       name,
       jobTitle,
@@ -109,101 +98,42 @@ const PostLeaveForm = (props) => {
     setAddress("");
   history.push("/table");
 
-  }
-  };
+  
+  }};
 
 
   const handleSubmit = () => {
    alert("form not vaild")
-   // check  form data vliadation
-   //save current employee
-    // const isValid=validateFrom();
-  //  const isValidm=validateFromm();
-  //  console.log("isvalid:",isValid)
-  };
-// const validateFrom=() => {
-
-//   let isValid=validateleaveTypeSelector(stLeaveType,"leaveType","--Please select leave type--");
-  
-//   if(isValid&& 
-//     expectedLeavingDate&&
-//     expectedRejoiningDate){
-//       return true;
-//     }
-//   return false;
-// }
-// const validateFromm=() => {
  
 
-//   let isValidm=validateGuarantorSelector(guarantorState,"guarantor","select an option");
-//   console.log("before",isValidm)
 
-//   if(isValidm&& 
-//     expectedLeavingDate&&
-//     expectedRejoiningDate){
-//       return true;
-//     }
-//   return false;
-//   console.log("after",isValidm)
-// }
-// const validateleaveTypeSelector=(selectorValue,errorName,initialValue)=>{
-//   const errorObject=formErrors;
-//   if(!selectorValue||selectorValue==initialValue){
-//   const leaveType="This Field Is Required";
-//     setFormErrors({leaveType,guarantor:errorObject.guarantor,replacement:errorObject.replacement});
-//   }
-//   else{
-//     errorObject[errorName]="";
-//   }
-//   console.log("errorObject[errorName]",errorObject[errorName])
-//   return errorObject[errorName].length=="";
-// }
-// const validateReplacementSelector=(selectorValue,errorName,initialValue)=>{
-//   console.log("selectorValue:",selectorValue  )
-//   const errorObject=formErrors;
-//   if(!selectorValue||selectorValue==initialValue){
-//   const replacement="This Field Is Required";
-//     setFormErrors({replacement,leaveType:errorObject.leaveType,guarantor:errorObject.guarantor});
-//   }
-//   else{
-//     errorObject[errorName]="";
-//   }
-//   //setFormErrors(errorObject);
-//   console.log("errorObject",errorObject)
-//   return errorObject[errorName].length>0;
-// }
-// const validateGuarantorSelector=(selectorValue,errorName,initialValue)=>{
-
-//   const errorObjectGur=formErrors;
-//   if(!selectorValue||selectorValue==initialValue){
-//   const guarantor="This Field Is Required";
-//   console.log("guarantor:",guarantor  )
-//     setFormErrors({guarantor,leaveType:errorObjectGur.leaveType,replacement:errorObjectGur.replacement});
-
-//   }
-//   else{
-    
-//     errorObjectGur[errorName]="";
-//   }
-//   //setFormErrors(errorObjectGur);
-//   return errorObjectGur[errorName].length>0;
-// }
-// const handleOnChangeLeaveType=(e)=>{
-//   setStLeaveType(e.currentTarget.value);
-//   let isValid=validateleaveTypeSelector(e.currentTarget.value,"leaveType","--Please select leave type--");
-// }
-// const handleOnChangeGuarantor=(e)=>{
-//   setGuarantorState(e.currentTarget.value);
-//   let isValid=validateGuarantorSelector(e.currentTarget.value,"guarantor","select an option");
-// }
-const handleOnChangeGuarantor=(event)=>{
- 
-  fields["guarantor"]=(event.currentTarget.value);
-
-  setFields({fields})
-  console.log("fields",fields["guarantor"])
-  // let isValid=validateReplacementSelector(e.currentTarget.value,"replacement","select an option");
 }
+
+useEffect(() => {
+  isSubmmitting && setErrors(Validation(values));
+}, [values])
+const handelChanges = (e) => {
+  let newValues ={
+    ...values,
+    [e.target.name]: e.target.value,
+  }
+setValues(newValues)
+
+
+
+if(Object.keys(Validation(values)).length===0){
+const {
+  
+  radio1,
+  radio2,
+  stLeaveType,
+  GuarantorSelect,
+  Replacement,
+  Remarks,Attchments
+} = values;
+}
+
+;}
   return ( 
     <FormGroup tag="fieldset" className="m-1 p-1 text-muted">
       <div className="container-fluid  text-muted p-1 m-0">
@@ -227,6 +157,7 @@ const handleOnChangeGuarantor=(event)=>{
                       type="radio"
                       name="radio1"
                       className="text-capitalize "
+                      onChange={handelChanges}
                     />{" "}
                     abroad
                   </Label>
@@ -235,9 +166,13 @@ const handleOnChangeGuarantor=(event)=>{
                       type="radio"
                       name="radio1"
                       className="text-capitalize"
+                      onChange={handelChanges}
                     />{" "}
                     local
                   </Label>
+                  {errors.radio1 && (
+                  <span className="text-danger text-left mt-2 ml-2">
+                    {errors.radio1}</span>)}
                 </FormGroup>
               </div>
             </div>
@@ -253,6 +188,7 @@ const handleOnChangeGuarantor=(event)=>{
                       type="radio"
                       name="radio2"
                       className="text-capitalize "
+                      onChange={handelChanges}
                     />{" "}
                     yes
                   </Label>
@@ -261,9 +197,13 @@ const handleOnChangeGuarantor=(event)=>{
                       type="radio"
                       name="radio2"
                       className="text-capitalize"
+                      onChange={handelChanges}
                     />{" "}
                     no
                   </Label>
+                  {errors.radio2 && (
+                  <span className="text-danger text-left mt-2 ml-2">
+                    {errors.radio2}</span>)}
                 </FormGroup>
               </div>
             </div>
@@ -322,7 +262,7 @@ const handleOnChangeGuarantor=(event)=>{
                   id="stLeaveType"
                   className="form-select text-muted"
                   name="stLeaveType"
-                  // onChange={handleOnChangeLeaveType}
+                  onChange={handelChanges}
                 >
                    <option className="text-capitalize">
                    --Please select leave type--
@@ -335,7 +275,9 @@ const handleOnChangeGuarantor=(event)=>{
                     annual leave during reserve
                   </option>
                 </select>
-                {/* {formErrors.leaveType && <span style={{color:"red"}}>{formErrors.leaveType}</span>} */}
+                {errors.stLeaveType && (
+                  <span className="text-danger text-left mt-2 ml-2">
+                    {errors.stLeaveType}</span>)}
               </div>
               <label className="col-md-4 text-capitalize text-form-right align-self-center">
                 no. of days
@@ -355,7 +297,7 @@ const handleOnChangeGuarantor=(event)=>{
                         errorMessages={[
                           "this field is required"
                         ]}
-                        className=" "
+                     
                       />
               </div>
             </div>
@@ -381,19 +323,22 @@ const handleOnChangeGuarantor=(event)=>{
                       {" "}
                       <select
                         id="GuarantorSelect"
+                        name="GuarantorSelect"
                         className="form-select text-muted bg-white"
                         ref={inputRef}
-                        onChange={handleOnChangeGuarantor} 
-                        value={setFields["Guarantor"]}
+                        onChange={handelChanges}
+                        defaultValue="select an option"
                       >
                         <option>select an option</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                       </select>
-                      {errors.guarantor&& <span style={{color:"red"}}>{errors.guarantor}hh</span>}
-                    </CardText>
+                       {errors.GuarantorSelect && (
+                  <span className="text-danger text-left mt-2 ml-2">
+                    {errors.GuarantorSelect}</span>)}                   
+                     </CardText>
                   </CardBody>
                 </Card>
               </div>
@@ -408,7 +353,9 @@ const handleOnChangeGuarantor=(event)=>{
                       <select
                         id="option"
                         className="form-select text-muted bg-white"
-                        // onChange={handleOnChangeReplacement}
+                        name="Replacement"
+                        onChange={handelChanges}
+                        defaultValue="select an option"
                       >
                         <option>select an option</option>
                         <option>2</option>
@@ -416,8 +363,10 @@ const handleOnChangeGuarantor=(event)=>{
                         <option>4</option>
                         <option>5</option>
                       </select>
-                      {/* {formErrors.replacement && <span style={{color:"red"}}>{formErrors.replacement}hh</span>} */}
-                    </CardText>
+                      {errors.Replacement && (
+                  <span className="text-danger text-left mt-2 ml-2">
+                    {errors.Replacement}</span>)}                     
+                     </CardText>
                   </CardBody>
                 </Card>
               </div>
@@ -484,7 +433,6 @@ const handleOnChangeGuarantor=(event)=>{
                           "this field is required",
                           "email is not valid",
                         ]}
-                        className=" "
                       />
                     </div>
                   </div>
@@ -505,9 +453,13 @@ const handleOnChangeGuarantor=(event)=>{
                       name="w3review"
                       rows="4"
                       cols="50"
-                      
+                      name="Remarks"
+                      onChange={handelChanges}
                       style={{ width: "100%" }}
                     ></textarea>
+                          {errors.Remarks && (
+                  <span className="text-danger text-left mt-2 ml-2">
+                    {errors.Remarks}</span>)} 
                   </CardText>
                 </CardBody>
               </Card>
@@ -518,7 +470,10 @@ const handleOnChangeGuarantor=(event)=>{
                   <h5>Attchments</h5>
                 </CardHeader>
                 <CardBody>
-                  <FileUploadRe />
+                  <FileUploadRe  />
+                        {errors.Attchments && (
+                  <span className="text-danger text-left mt-2 ml-2">
+                    {errors.Attchments}</span>)}
                 </CardBody>
               </Card>
             </div>

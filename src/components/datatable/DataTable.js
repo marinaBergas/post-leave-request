@@ -1,15 +1,8 @@
 
-
-
-
-
-// export default DataTable
-/* eslint-disable no-use-before-define */
-import React, { useEffect, useRef, useState } from 'react';
+import React, {  useRef, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {AiOutlineReload} from 'react-icons/ai';
-import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import './dataTable.scss'
 import { setSearchEmployee } from '../../redux/Employee.action';
@@ -20,7 +13,7 @@ const mapState = ({ employee }) => ({
 });
 export default function DataTable() {
 
-  const {  currentEmployee ,searchEmployee} = useSelector(mapState);
+  const {  currentEmployee } = useSelector(mapState);
   const [value, setValue] = useState({ });
   const ulIconRef = useRef();
   const inputRef = useRef();
@@ -49,7 +42,7 @@ export default function DataTable() {
           <React.Fragment>
             <div className="row  align-items-center justify-content-center">
               <div className="col-md-2">
-              <img src={employeeImg} alt="employee-image" className="w-100"/>
+              <img src={employeeImg} alt="employee-img" className="w-100"/>
               </div>
               <div className="col-md-10">
               <p>{(option.code)}|{(option.name)}|{(option.jobTitle)}</p>
@@ -72,7 +65,7 @@ export default function DataTable() {
             variant="outlined"
             inputProps={{
               ...params.inputProps,
-              autoComplete: 'new-password', // disable autocomplete and autofill
+              autoComplete: 'new-password', 
             
             }}
             

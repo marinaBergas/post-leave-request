@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { setCurrentEmployee } from '../../redux/Employee.action';
 import AnnualLeave from '../annual leave/AnnualLeave';
 import HomeSearch from '../datatable/home-search/HomeSearch';

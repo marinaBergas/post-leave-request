@@ -64,28 +64,35 @@ const Requests = (props) => {
     ],
     []
   );
+  let arr = [];
+  for (let i = 0; i < Math.ceil(currentEmployee.length / 10); i++) {
+    arr.push(`page ${i + 1} of ${Math.ceil(currentEmployee.length / 10)}`);
+  }
+  const [page, setpage] = useState([]);
+  const goForward = (pageNum) => {
+    let num = pageNum == 0 ? 0 : pageNum * 10;
+    setpage(
+      currentEmployee.filter((item, i) => {
+        return i === num || (i <= num + 9 && i >= num);
+      })
+    );
+  };
+  useEffect(() => {
+    goForward(0);
+  }, [currentEmployee]);
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
-    state: { pageIndex, pageSize },
-    setPageSize,
-    previousPage,
-    pageOptions,
-    nextPage,
-    gotoPage,
-    rowsPerPage,
-    pageCount,
-    canPreviousPage,
-    canNextPage,
-    page,
+    state: { pageSize },
+
     prepareRow,
   } = useTable(
     {
       columns,
       data,
-      initialState: { pageIndex: 3, pageSize: 2 },
+      initialState: { pageSize: 2 },
       rowsPerPage: "2",
     },
     usePagination
@@ -117,13 +124,15 @@ const Requests = (props) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {currentEmployee.map((employee, index) => (
+          {page.map((employee, index) => (
             <tr key={index} className="text-center align-baseline text-muted ">
-              <td className={employee["requestType"]} style={{ width: "5%" }}>{employee.id}</td>
+              <td className={employee["requestType"]} style={{ width: "5%" }}>
+                {employee.id}
+              </td>
               <td>
                 <img alt="employee-img" src={photo} height="30px" />{" "}
               </td>
-              <td  >{employee.code}</td>
+              <td>{employee.code}</td>
               <td style={{ width: "18%" }} className="overflow-hidden">
                 {employee.name}
               </td>
@@ -154,7 +163,9 @@ const Requests = (props) => {
             </div>
             <div className="col-md-4 d-flex p-0 ">
               <div className="requests_color_taken mx-1 "></div>
-              <h6 className="requests-type" >Action taken (Leaving is posted and approved or Leave extension) </h6>
+              <h6 className="requests-type">
+                Action taken (Leaving is posted and approved or Leave extension){" "}
+              </h6>
             </div>
             <div className="col-md-2 col-xs-4 d-flex p-0  requests_color-col_second">
               <div className="requests_color_initial mx-1"></div>
@@ -183,10 +194,16 @@ const Requests = (props) => {
           </div>
         </div>
         <div className="col-md-2">
-          <select>
-            <option onClick={() => gotoPage(0)}>Page 1 of 3</option>
-            <option onClick={() => gotoPage(1)}>Page 2 of 3</option>
-            <option onClick={() => gotoPage(2)}>Page 3 of 3</option>
+          <select
+            onChange={(e) => {
+              goForward(e.target.value);
+            }}
+          >
+            {arr.map((option, index) => (
+              <option key={index} value={index}>
+                {option}
+              </option>
+            ))}
           </select>
         </div>
       </div>
