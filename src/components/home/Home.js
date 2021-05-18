@@ -5,7 +5,11 @@ import AnnualLeave from '../annual leave/AnnualLeave';
 import HomeSearch from '../datatable/home-search/HomeSearch';
 import EmployeeInformation from '../employee search information/EmployeeInformation';
 import PostLeaveForm from '../post-leave-form/Form';
-
+import './form-Fieldset.scss'
+import {
+    FormGroup,
+  } from "reactstrap";
+  import {AiFillFlag} from 'react-icons/ai'
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -20,6 +24,14 @@ const Home = () => {
     return (
         <div>
             <div className="container-fluid">
+            <FormGroup tag="fieldset" className="">
+            <legend className="text-capitalize text-right  text-body p-2 d-flex form-fieldSet-legend" style={{width:"100%"}} >
+             <div className="post-leave-request px-3"><h5>Post Leave Request</h5></div>
+            <div className="d-flex px-3"  >
+                <AiFillFlag className="text-muted mx-1"/>
+                <h5>Request No.</h5>
+                </div> 
+            </legend>
                 <div className="row">
                     <div className="col-lg-9 col-xs-12">
                         <HomeSearch/>
@@ -30,7 +42,7 @@ const Home = () => {
                         <AnnualLeave/>
                     </div>
                 </div>
-
+            </FormGroup>
             </div>
         </div>
     )

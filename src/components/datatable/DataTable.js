@@ -23,7 +23,7 @@ export default function DataTable() {
  
 
   return (
-    <div style={{ width: "70%" }}>
+    <div >
       <Autocomplete
           onChange={(event, newValue) => {
             setValue(newValue);
@@ -42,7 +42,7 @@ export default function DataTable() {
           <React.Fragment>
             <div className="row  align-items-center justify-content-center">
               <div className="col-md-2">
-              <img src={employeeImg} alt="employee-img" className="w-100"/>
+              <img src={employeeImg} alt="employee-img" style={{width:"70px"}}/>
               </div>
               <div className="col-md-10">
               <p>{(option.code)}|{(option.name)}|{(option.jobTitle)}</p>
@@ -58,7 +58,7 @@ export default function DataTable() {
           <React.Fragment>
             <div className="input-icons text-muted">
           <TextField
-          style={{ width: "70%" }}
+         
             {...params}
             ref={inputRef}
             label="Search Employee Name, Code or Job Title"
@@ -68,6 +68,7 @@ export default function DataTable() {
               autoComplete: 'new-password', 
             
             }}
+            className="text-field"
             
           />
        <label ref={ulIconRef}  style={{ width: "12%" }} className="text-muted">

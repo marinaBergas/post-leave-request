@@ -3,9 +3,7 @@ const Validation = (values) => {
   if (!values["radio1"] && (JSON.stringify(values["radio1"]!="this field is required"))){
     errors.radio1 = "this field is required";
   } 
-  // if (JSON.stringify(errors["radio1"]=="this field is required")){
-  //   (errors["radio1"])=" ";
-  // }
+ 
   if (!values["radio2"]){
     errors.radio2 = "this field is required";
  

@@ -116,7 +116,7 @@ const Requests = (props) => {
               {...headerGroup.getHeaderGroupProps()}
             >
               {headerGroup.headers.map((column) => (
-                <th className="text-capitalize" {...column.getHeaderProps()}>
+                <th className="text-capitalize header-col" {...column.getHeaderProps()}>
                   {column.render("Header")}
                 </th>
               ))}

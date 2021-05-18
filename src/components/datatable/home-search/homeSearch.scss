@@ -1,4 +1,33 @@
 $card-header-color: #d3d3d3;
+$plus-icons-color:#24298F;
 .employ-search-home{
     background-color: $card-header-color;
+}
+.world-icon{
+    font-size: 2em;
+    width: 50px !important;
+    color:$plus-icons-color ;
+    @media (max-width:768px) {
+        font-size: 1.8em;
+    width: 40px !important;
+    padding: 0px;
+    }
+}
+.search-input{
+    width: 80% !important;
+    @media (max-width:992px) {
+        width: 93% !important;
+    }
+    @media (max-width:768px) {
+    width: 85% !important;
+    }
+    border-left: 2px solid gray;
+}
+.text-field{
+    height: 32px;
+    position: relative;
+    @media (max-width:768px) {
+        width: 100% !important;
+      
+        }
 }

@@ -19,7 +19,12 @@ $request_finial_level_approval:#3C763D;
                     background-color: $card-header-color;
                     th{
                         font-size: 0.82rem;
-                       
+                        @media (max-width:768px) {
+                            font-size: 0.7rem;
+                        }
+                        @media (max-width:576px) {
+                            font-size: 0.55rem;
+                        }
                     }
                 }
             }
@@ -30,6 +35,7 @@ $request_finial_level_approval:#3C763D;
             font-weight: 600 !important;
         }
         .request_initial{
+            padding-left: 20px;
             border-left:10px solid $request_initial_color ;
         }
         .request_action_taken{

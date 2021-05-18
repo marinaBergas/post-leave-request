@@ -13,19 +13,21 @@ import { CgMathPlus } from "react-icons/cg";
 import { FaRegCalendarCheck } from "react-icons/fa";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Validation from "./Validation";
-import "./form.scss";
-import FileUploadRe from "./FileUpload";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentEmployee } from "../../redux/Employee.action";
 import { useForkRef } from "@material-ui/core";
-
+import { ImAttachment } from 'react-icons/im';
+import { HiInformationCircle } from 'react-icons/hi';
+import "./form.scss";
+import './fileUpload.scss'
 
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
+  searchEmployee: employee.searchEmployee,
 });
 const PostLeaveForm = (props) => {
-  const { currentEmployee } = useSelector(mapState);
+  const { currentEmployee ,searchEmployee} = useSelector(mapState);
   const dispatch = useDispatch();
   const [name, setname] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -33,24 +35,25 @@ const PostLeaveForm = (props) => {
   const [expectedLeavingDate, setExpectedLeavingDate] = useState("");
   const [expectedRejoiningDate, setExpectedRejoiningDate] = useState("");
   const [stLeaveType, setStLeaveType] = useState("");
-  // const [guarantorState, setGuarantorState] = useState("");
-  // const [replacement, setReplacement] = useState("");
+  const [guarantorState, setGuarantorState] = useState("");
+  const [replacement, setReplacement] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
   const [expectedEndDate, setExpectedEndDate] = useState("");
   const [errors, setErrors] = useState({})
   const [values, setValues] = useState('');
-  const [isSubmmitting, setIsSubmmitting] = useState(false)
-  
+  const [isSubmmitting, setIsSubmmitting] = useState(false);
+  let [fileName, setFileName] = useState('');
+	let [fileSize, setFileSize] = useState('');
+	let [errorUpload, setErrorUpload] = useState('');
+	const [valuesnew, setvaluesnew] = useState('');
   const inputRef = useForkRef();
-
   const history = useHistory();
-  const handlePush = () => {
-    history.push("/table");
-  };
+  
+  
   const addEmployee = async (employee) => {
-    const response = await fetch("http://localhost:8000/employees", {
+    const res = await fetch("http://localhost:8000/employees", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -58,7 +61,7 @@ const PostLeaveForm = (props) => {
       body: JSON.stringify(employee),
     });
 
-    // const data = await res.json();
+    const data = await res.json();
 
   };
   
@@ -69,7 +72,7 @@ setIsSubmmitting(true);
 
 if(Object.keys(Validation(values)).length===0&& 
   expectedLeavingDate&&
-   expectedRejoiningDate&&expectedEndDate&&address)
+   expectedRejoiningDate&&expectedEndDate&&address&&searchEmployee)
 {
 const {
   
@@ -96,31 +99,29 @@ const {
     setExpectedRejoiningDate("");
     setStLeaveType("");
     setAddress("");
-  history.push("/table");
+  history.push("/");
 
   
   }};
 
 
   const handleSubmit = () => {
-   alert("form not vaild")
+   alert("you should select employee")
  
-
 
 }
 
 useEffect(() => {
   isSubmmitting && setErrors(Validation(values));
 }, [values])
+
+
 const handelChanges = (e) => {
   let newValues ={
     ...values,
     [e.target.name]: e.target.value,
   }
 setValues(newValues)
-
-
-
 if(Object.keys(Validation(values)).length===0){
 const {
   
@@ -132,8 +133,35 @@ const {
   Remarks,Attchments
 } = values;
 }
+};
+const handelChangesUploadFile = (e) => {
+  e.preventDefault();
+  setFileName(e.target.files[0].name)
+  setFileSize(e.target.files[0].size)
+  if(fileSize > 1000000){
+    setErrorUpload("File upload size is larger than 1MB");
+        }
+    let newValues ={
+    ...values,
+    [e.target.name]: e.target.value,
+    }
+    setValues(newValues)
+  console.log("newValues",values)
+  if(Object.keys(Validation(values)).length===0)
+  {
+  const {
+  radio1,
+  radio2,
+  stLeaveType,
+  GuarantorSelect,
+  Replacement,
+  Remarks,Attchments
+  } = values
+}
+  
+}
 
-;}
+
   return ( 
     <FormGroup tag="fieldset" className="m-1 p-1 text-muted">
       <div className="container-fluid  text-muted p-1 m-0">
@@ -470,7 +498,17 @@ const {
                   <h5>Attchments</h5>
                 </CardHeader>
                 <CardBody>
-                  <FileUploadRe  />
+                <div className="input-group" style={{width:"80%"}}>
+			<input type="text" className="form-control bg-white " style={{border: "2px solid #ddd",width:"50px"}} readOnly placeholder={fileName}/>
+			<div className="input-group-btn">
+				<span className="fileUpload btn ">
+				<ImAttachment />
+					<input type="file" className="upload up" id="up"   onChange={handelChangesUploadFile}  name="Attchments"/>
+				</span>
+			</div>
+		</div>
+         <p className="info-text"><HiInformationCircle/> Max File Size 1 MB</p>
+		 <label>{errorUpload}</label>
                         {errors.Attchments && (
                   <span className="text-danger text-left mt-2 ml-2">
                     {errors.Attchments}</span>)}
@@ -493,7 +531,7 @@ const {
             </div>
           </div>
 
-          <button onClick={handlePush}>go to table</button>
+          
         </ValidatorForm>
       </div>
     </FormGroup>

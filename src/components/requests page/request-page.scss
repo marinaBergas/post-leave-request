@@ -1,0 +1,102 @@
+$icon-color-table:#24298F;
+@mixin table-icons(){
+    width:50px !important;
+    font-size:3em !important;
+    justify-content: center;
+    text-align: center;
+    @media (max-width:991.98px) {
+        font-size: 2.8em !important;
+        width:33px !important;
+        padding: 0px;
+        margin: 0px;
+    }
+    @media (max-width:767.98px) {
+        font-size: 2.5em !important;
+           width:35px !important;
+           padding: 0px;
+           margin: 0px;
+    }
+    @media (max-width:575.98px) {
+        font-size: 1.7em !important;
+           width:18px !important;
+           padding: 0px;
+           margin: 0px;
+    }
+}
+.world-icon-table-container{
+    @include table-icons();
+
+    color: $icon-color-table;
+  
+   
+    .world-icon-table{
+        border:1px solid $icon-color-table !important;
+        border-radius: 10px;
+      line-height: 0px !important;
+      vertical-align: text-top;
+    @media (max-width:768px) {
+        font-size: 1.3em;
+        line-height: 0px !important;
+    padding: 0px;
+    vertical-align: text-top;
+    }
+    }
+}
+.serch-input{
+    margin-left: 20px;
+    vertical-align: middle !important;
+    
+    @media (max-width:992px) {
+        vertical-align: inherit;
+    }
+    @media (max-width:768px) {
+    width: 85% !important;
+    vertical-align: inherit;
+    }
+   
+}
+.search-icon-table-container{
+    @include table-icons();
+ 
+    color: white;
+ margin-right: auto;
+   
+    .search-icon-table{
+        border:1px solid $icon-color-table !important;
+        background-color: $icon-color-table;
+        border-radius: 10px;
+      line-height: 0px !important;
+      vertical-align: text-top;
+    @media (max-width:768px) {
+        font-size: 1.3em;
+        line-height: 0px !important;
+    padding: 0px;
+    vertical-align: text-top;
+    }
+    }
+}
+.edit-icon-table-container{
+    font-size:2.8em !important;
+    justify-content: center;
+  text-align: right;
+  @media (max-width:991.98px) {
+    font-size:2.4em !important;
+        text-align: right;
+        width: 620px !important;
+}
+    @media (max-width:767.98px) {
+        font-size:2.4em !important;
+        text-align: right;
+        width: 520px !important;
+    }
+    
+    @media (max-width:575.98px) {
+        font-size:2em !important;
+        width: 380px !important;
+        text-align: right;
+    }
+    .edit-icon-table{
+        vertical-align: text-top;
+        color:$icon-color-table ;
+    }
+}
