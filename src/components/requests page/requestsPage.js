@@ -16,8 +16,9 @@ import { FaRegEye } from "react-icons/fa";
 import { FormGroup } from "reactstrap";
 
 import "./request-page.scss";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router";
+import { setLeavePost } from "../../redux/Employee.action";
 const mapState = ({ employee }) => ({
     currentEmployee: employee.currentEmployee
   });
@@ -25,8 +26,14 @@ const mapState = ({ employee }) => ({
 const RequestsPage = () => {
     const {  currentEmployee } = useSelector(mapState);
     const history = useHistory();
-    const handlePush = () => {
+    const dispatch = useDispatch();
+    const handlePushSubmit = () => {
       history.push("/form");
+      dispatch (setLeavePost("submit"));
+    };
+    const handlePushEdit = () => {
+      history.push("/form");
+      dispatch (setLeavePost("edit"))
     };
   return (
     <div className="container-fluid">
@@ -53,9 +60,10 @@ const RequestsPage = () => {
             <FiSearch className="search-icon-table" />
           </div>
           <div className="col-lg-4 col-md-3  edit-icon-table-container">
-            <AiOutlinePlus onClick={handlePush} className="edit-icon-table mr-1" />
-            <RiEditBoxLine className="edit-icon-table mr-1" />
-            <FaRegEye className="edit-icon-table mr-1" />
+      
+          { < AiOutlinePlus onClick={handlePushSubmit} className="edit-icon-table mr-1" />}
+          {<RiEditBoxLine onClick={handlePushEdit} className="edit-icon-table mr-1" />}
+           <FaRegEye className="edit-icon-table mr-1" />
             <AiOutlineCarryOut className="edit-icon-table mr-1" />
             <RiDeleteBin6Fill className="edit-icon-table mr-1" />
             <AiFillPrinter className="edit-icon-table mr-1" />

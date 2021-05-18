@@ -19,15 +19,17 @@ import { setCurrentEmployee } from "../../redux/Employee.action";
 import { useForkRef } from "@material-ui/core";
 import { ImAttachment } from 'react-icons/im';
 import { HiInformationCircle } from 'react-icons/hi';
+
 import "./form.scss";
 import './fileUpload.scss'
 
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
   searchEmployee: employee.searchEmployee,
+  leavePost: employee.leavePost,
 });
-const PostLeaveForm = (props) => {
-  const { currentEmployee ,searchEmployee} = useSelector(mapState);
+const PostLeaveForm = ({text}) => {
+  const { currentEmployee ,searchEmployee,leavePost} = useSelector(mapState);
   const dispatch = useDispatch();
   const [name, setname] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -62,9 +64,36 @@ const PostLeaveForm = (props) => {
     });
 
     const data = await res.json();
+    
 
   };
   
+    const  updateLeavePost= async(id) =>{
+      const leavePostToggle = await fetchLeavePost(id);
+      
+      console.log("after",leavePostToggle.stLeaveType)
+      const updateLeavePost = {...searchEmployee,...values}
+      const requestOptions = {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updateLeavePost)
+      };
+      const response = await fetch(`http://localhost:8000/employees/${id}`, requestOptions);
+      const data = await response.json();
+      // setLeavePostId(data.id);
+      // console.log("data",data)
+      console.log("before",leavePostToggle["stLeaveType"])
+  }
+  
+  const fetchLeavePost = async(id)=>{
+      const res = await fetch (`http://localhost:8000/employees/${id}`)
+     const data = await res.json()
+     return data 
+    }
+ 
+
+
+
   const onSubmit = (e) => {
    
 setErrors(Validation(values));
@@ -80,7 +109,8 @@ const {
   radio2,
   stLeaveType,
   GuarantorSelect,
-  Replacement,Remarks,Attchments
+  Replacement,Remarks,Attchments,
+  expectedLeavingDate,expectedRejoiningDate
 } = values;
 
     addEmployee({
@@ -198,24 +228,25 @@ const handelChangesUploadFile = (e) => {
                     />{" "}
                     local
                   </Label>
-                  {errors.radio1 && (
-                  <span className="text-danger text-left mt-2 ml-2">
-                    {errors.radio1}</span>)}
+                 
                 </FormGroup>
               </div>
+              {errors.radio2 && (
+                  <span className="text-danger text-right text-error mt-2 mr-auto">
+                    {errors.radio2}</span>)}
             </div>
 
             <div className="row text-left text-leave p-0 mx-2 py-2  ">
               <label className="col-md-3 text-capitalize text-form-right align-self-center">
                 require leave salary advance
               </label>
-              <div className="col-md-6 text-capitalize h6 ">
+              <div className="col-md-6 text-capitalize h6 text-form-radio ">
                 <FormGroup check>
                   <Label check className="text2-radio">
                     <Input
                       type="radio"
                       name="radio2"
-                      className="text-capitalize "
+                      className="text-capitalize ml-2"
                       onChange={handelChanges}
                     />{" "}
                     yes
@@ -224,16 +255,18 @@ const handelChangesUploadFile = (e) => {
                     <Input
                       type="radio"
                       name="radio2"
-                      className="text-capitalize"
+                      className="text-capitalize ml-2"
                       onChange={handelChanges}
                     />{" "}
                     no
                   </Label>
-                  {errors.radio2 && (
-                  <span className="text-danger text-left mt-2 ml-2">
-                    {errors.radio2}</span>)}
+                 
                 </FormGroup>
+              
               </div>
+              {errors.radio2 && (
+                  <span className="text-danger text-right text-error mt-2 mr-auto">
+                    {errors.radio2}</span>)}
             </div>
             <div className="row expected-leave-text p-0 mx-2 py-2">
               <label className="col-md-3 text-capitalize text-form-right align-self-center">
@@ -521,13 +554,22 @@ const handelChangesUploadFile = (e) => {
               <div className="btn cancel-btn text-secondary mx-2 px-2">
                 Cancel
               </div>
-             <button
+            { leavePost=="submit"&&<button
                 className="btn submit-btn mx-2 "
                 type="submit"
                 onClick={onSubmit}
+                text="formSubmit"
+              >submit</button>}
+           
+           { leavePost=="edit"  && <button
+                className="btn submit-btn mx-2 "
+                type="submit"
+                // onClick={()=>updateLeavePost(searchEmployee.id)}
+              
               >
-                Submit
-              </button>
+                edit
+              </button>}
+             
             </div>
           </div>
 

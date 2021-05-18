@@ -1,34 +1,6 @@
 {
   "employees": [
     {
-      "id": "983",
-      "name": "Laura Anne Eggleton",
-      "code": "1001",
-      "jobTitle": "General Manager",
-      "salaryProfile": "General Manage",
-      "expectedLeavingDate": "09/03/2021",
-      "expectedRejoiningDate": "15/03/2021",
-      "joiningDate": "01/07/2018",
-      "address": "Hotel Indigo Dubai DownTown",
-      "actualLeave": "",
-      "stLeaveType": "Annual Leave With Payroll",
-      "requestType": "request_initial"
-    },
-    {
-      "id": "836",
-      "name": "Amaila prasadini jayamanne",
-      "code": "1030",
-      "jobTitle": "Assistant Manager Of Finance ",
-      "salaryProfile": "Management",
-      "expectedLeavingDate": "09/11/2020",
-      "expectedRejoiningDate": "10/11/2020",
-      "joiningDate": "01/08/2019",
-      "address": "Hotel Indigo Dubai DownTown",
-      "actualLeave": "",
-      "stLeaveType": "Sick Leave",
-      "requestType": "request_initial"
-    },
-    {
       "id": "831",
       "name": "Amaila prasadini jayamanne",
       "code": "1030",
@@ -39,7 +11,7 @@
       "joiningDate": "01/10/2019",
       "address": "Hotel Indigo Dubai DownTown",
       "actualLeave": "08/11/2020",
-      "stLeaveType": "Sick Leave",
+      "stLeaveType": "annual leave with payroll",
       "requestType": "request_action_taken"
     },
     {
@@ -209,26 +181,6 @@
       "actualLeave": "",
       "stLeaveType": "Annual Leave With Payroll",
       "requestType": "request_finial_level_approval"
-    },
-    {
-      "name": "",
-      "jobTitle": "",
-      "salaryProfile": "",
-      "expectedLeavingDate": "2021-04-28",
-      "expectedRejoiningDate": "2021-05-11",
-      "stLeaveType": "annual leave with payroll",
-      "address": "5",
-      "id": "mQoC9IQ"
-    },
-    {
-      "name": "",
-      "jobTitle": "",
-      "salaryProfile": "",
-      "expectedLeavingDate": "2021-05-05",
-      "expectedRejoiningDate": "2021-05-04",
-      "stLeaveType": "annual leave with payroll",
-      "address": "5",
-      "id": "hfVz837"
     }
   ]
 }

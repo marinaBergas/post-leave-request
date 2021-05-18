@@ -14,11 +14,20 @@ $input-border-color:#E4E4E4;
                     text-align: left;
                 }
             }
-
+            .text-leave{
+                position: relative;
             .text-radio,
             .text2-radio {
                 margin-right: 1.8em;
             }
+           
+            .text-error{
+              position: absolute;
+              bottom: 0%;
+              left: 0%;
+              transform: translate(25%, 50%);
+            }
+        }
 
             .text-total-days {
                 margin-left: 5em;
@@ -31,7 +40,7 @@ $input-border-color:#E4E4E4;
                     }
                 }
             }
-
+         
          
               
                    

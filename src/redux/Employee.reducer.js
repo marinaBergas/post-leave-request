@@ -3,6 +3,7 @@ import employeeType from "./Employee.type"
 const INITIAL_STATE = {
     currentEmployee : [ ] ,
     searchEmployee :'',
+    leavePost:"submit",
 }
 
 const employeeReducer  = (state=INITIAL_STATE,action)=>{
@@ -15,7 +16,11 @@ const employeeReducer  = (state=INITIAL_STATE,action)=>{
             case employeeType.SET_SEARCH_EMPLOYEE_DETAILS :
                 return {
                     ...state , searchEmployee : action.payload
-                }     
+                }   
+                case employeeType.SET_Leave_post :
+                    return {
+                        ...state , leavePost : action.payload
+                    }    
     
         default :
         return state    

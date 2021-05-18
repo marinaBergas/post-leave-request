@@ -11,4 +11,8 @@ export const setSearchEmployee = user =>({
     type : employeeType.SET_SEARCH_EMPLOYEE_DETAILS  ,
     payload : user
 });
+export const setLeavePost = text =>({
+    type : employeeType.SET_Leave_post  ,
+    payload : text
+});
 
