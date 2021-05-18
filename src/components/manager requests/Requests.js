@@ -12,7 +12,6 @@ const mapState = ({ employee }) => ({
 });
 const Requests = (props) => {
   const { currentEmployee } = useSelector(mapState);
-  const [request, setRequestType] = useState({});
   console.log("currentEmployee", currentEmployee);
   const dispatch = useDispatch();
   const data = React.useMemo(
@@ -64,9 +63,9 @@ const Requests = (props) => {
     ],
     []
   );
-  let arr = [];
+  let pageAray = [];
   for (let i = 0; i < Math.ceil(currentEmployee.length / 10); i++) {
-    arr.push(`page ${i + 1} of ${Math.ceil(currentEmployee.length / 10)}`);
+    pageAray.push(`page ${i + 1} of ${Math.ceil(currentEmployee.length / 10)}`);
   }
   const [page, setpage] = useState([]);
   const goForward = (pageNum) => {
@@ -84,10 +83,6 @@ const Requests = (props) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
-    state: { pageSize },
-
-    prepareRow,
   } = useTable(
     {
       columns,
@@ -199,7 +194,7 @@ const Requests = (props) => {
               goForward(e.target.value);
             }}
           >
-            {arr.map((option, index) => (
+            {pageAray.map((option, index) => (
               <option key={index} value={index}>
                 {option}
               </option>

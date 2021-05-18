@@ -15,7 +15,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Validation from "./Validation";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentEmployee } from "../../redux/Employee.action";
+
 import { useForkRef } from "@material-ui/core";
 import { ImAttachment } from 'react-icons/im';
 import { HiInformationCircle } from 'react-icons/hi';
@@ -24,13 +24,11 @@ import "./form.scss";
 import './fileUpload.scss'
 
 const mapState = ({ employee }) => ({
-  currentEmployee: employee.currentEmployee,
   searchEmployee: employee.searchEmployee,
   leavePost: employee.leavePost,
 });
 const PostLeaveForm = ({text}) => {
-  const { currentEmployee ,searchEmployee,leavePost} = useSelector(mapState);
-  const dispatch = useDispatch();
+  const { searchEmployee,leavePost} = useSelector(mapState);
   const [name, setname] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [salaryProfile, setSalaryProfile] = useState("");
@@ -49,7 +47,7 @@ const PostLeaveForm = ({text}) => {
   let [fileName, setFileName] = useState('');
 	let [fileSize, setFileSize] = useState('');
 	let [errorUpload, setErrorUpload] = useState('');
-	const [valuesnew, setvaluesnew] = useState('');
+	
   const inputRef = useForkRef();
   const history = useHistory();
   
@@ -70,8 +68,6 @@ const PostLeaveForm = ({text}) => {
   
     const  updateLeavePost= async(id) =>{
       const leavePostToggle = await fetchLeavePost(id);
-      
-      console.log("after",leavePostToggle.stLeaveType)
       const updateLeavePost = {...searchEmployee,...values}
       const requestOptions = {
           method: 'PUT',
@@ -80,9 +76,6 @@ const PostLeaveForm = ({text}) => {
       };
       const response = await fetch(`http://localhost:8000/employees/${id}`, requestOptions);
       const data = await response.json();
-      // setLeavePostId(data.id);
-      // console.log("data",data)
-      console.log("before",leavePostToggle["stLeaveType"])
   }
   
   const fetchLeavePost = async(id)=>{
@@ -176,7 +169,6 @@ const handelChangesUploadFile = (e) => {
     [e.target.name]: e.target.value,
     }
     setValues(newValues)
-  console.log("newValues",values)
   if(Object.keys(Validation(values)).length===0)
   {
   const {

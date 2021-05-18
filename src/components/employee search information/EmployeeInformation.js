@@ -7,11 +7,7 @@ const mapState = ({ employee }) => ({
   searchEmployee: employee.searchEmployee,
 });
 const EmployeeInformation = () => {
-  useEffect(() => {
-    console.log(searchEmployee);
-  }, []);
   const { searchEmployee } = useSelector(mapState);
-  console.log("searchEmployee", searchEmployee);
   return (
     <div className="container-fluid p-0 m-0">
       <div className="row my-1 employInfo p-0 mx-1 ">
@@ -19,11 +15,8 @@ const EmployeeInformation = () => {
           <img src={employImage} alt="employee-image" className="w-100 h-100" />
         </div>
         <div className="col-md-10  text-muted pt-2">
-          
-           
               <div className="row ">
                 <div className="row ">
-                
                 {searchEmployee && (
                   <span className="col-md-1 text-info-left px-1 m-0 ">
                     {searchEmployee.code}||{" "}

@@ -1,8 +1,8 @@
 import React from 'react';
 import DataTable from '../DataTable';
 import {BiWorld} from 'react-icons/bi'
-import './homeSearch.scss'
-const HomeSearch = () => {
+import './formSearch.scss'
+const FormSearch = () => {
     return (
         <div className="container-fluid p-0 m-0">
           <div className="row employ-search-home mx-1 ">
@@ -18,4 +18,4 @@ const HomeSearch = () => {
     )
 }
 
-export default HomeSearch
+export default FormSearch

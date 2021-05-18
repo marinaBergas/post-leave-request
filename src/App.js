@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Switch,Route } from 'react-router-dom';
 
 import './App.scss';
-import Home from './components/home/Home';
+import FormFieldset from './components/form-fieldset/FormFieldset';
 import RequestsPage from './components/requests page/RequestsPage';
 
 
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Router>
       <Switch>
-            <Route path="/form" exact component={Home} />
+            <Route path="/form" exact component={FormFieldset} />
             <Route path="/" exact component={RequestsPage} />
       </Switch>
           

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch} from 'react-redux';
 import { setCurrentEmployee } from '../../redux/Employee.action';
 import AnnualLeave from '../annual leave/AnnualLeave';
-import HomeSearch from '../datatable/home-search/HomeSearch';
+import FormSearch from '../datatable/form-search/FormSearch';
 import EmployeeInformation from '../employee search information/EmployeeInformation';
 import PostLeaveForm from '../post-leave-form/Form';
 import './form-Fieldset.scss'
@@ -11,7 +11,7 @@ import {
   } from "reactstrap";
   import {AiFillFlag} from 'react-icons/ai'
 
-const Home = () => {
+const FormFieldset = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         async function fetchData(){
@@ -34,7 +34,7 @@ const Home = () => {
             </legend>
                 <div className="row">
                     <div className="col-lg-9 col-xs-12">
-                        <HomeSearch/>
+                        <FormSearch/>
                         <EmployeeInformation/>
                         <PostLeaveForm/>
                     </div>
@@ -48,4 +48,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default FormFieldset
