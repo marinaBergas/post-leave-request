@@ -25,7 +25,13 @@ $input-border-color:#E4E4E4;
               position: absolute;
               bottom: 0%;
               left: 0%;
+              color: red;
+              font-size:0.8em !important;
               transform: translate(25%, 50%);
+              @media (max-width:991.98px) {
+                transform: translate(0%, 25%);
+                font-size:.7em !important;
+              }
             }
         }
 
@@ -41,7 +47,14 @@ $input-border-color:#E4E4E4;
                 }
             }
          
-         
+         .text-errors{
+            color: red;
+            font-size:.8em !important;
+            @media (max-width:991.98px) {
+           
+              font-size:.7em !important;
+            }
+         }
               
                    
 

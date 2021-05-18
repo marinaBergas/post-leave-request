@@ -224,7 +224,7 @@ const handelChangesUploadFile = (e) => {
                 </FormGroup>
               </div>
               {errors.radio2 && (
-                  <span className="text-danger text-right text-error mt-2 mr-auto">
+                  <span className=" text-right text-error mt-2 mr-auto">
                     {errors.radio2}</span>)}
             </div>
 
@@ -257,7 +257,7 @@ const handelChangesUploadFile = (e) => {
               
               </div>
               {errors.radio2 && (
-                  <span className="text-danger text-right text-error mt-2 mr-auto">
+                  <span className="text-right text-error mt-2 mr-auto">
                     {errors.radio2}</span>)}
             </div>
             <div className="row expected-leave-text p-0 mx-2 py-2">
@@ -311,6 +311,7 @@ const handelChangesUploadFile = (e) => {
                 1st leave type
               </label>
               <div className="col-md-3 text-capitalize text-muted">
+                <div>
                 <select
                   id="stLeaveType"
                   className="form-select text-muted"
@@ -328,13 +329,15 @@ const handelChangesUploadFile = (e) => {
                     annual leave during reserve
                   </option>
                 </select>
-                {errors.stLeaveType && (
-                  <span className="text-danger text-left mt-2 ml-2">
-                    {errors.stLeaveType}</span>)}
+            
               </div>
+              {errors.stLeaveType && (
+                  <span className="text-left text-errors mt-2 ml-2">
+                    {errors.stLeaveType}</span>)}        </div>
               <label className="col-md-4 text-capitalize text-form-right align-self-center">
                 no. of days
               </label>
+      
               <div className="col-md-2 text-capitalize  ">
             
                    <TextValidator
@@ -389,7 +392,7 @@ const handelChangesUploadFile = (e) => {
                         <option value="5">5</option>
                       </select>
                        {errors.GuarantorSelect && (
-                  <span className="text-danger text-left mt-2 ml-2">
+                  <span className="text-left mt-2 text-errors ml-2">
                     {errors.GuarantorSelect}</span>)}                   
                      </CardText>
                   </CardBody>
@@ -417,7 +420,7 @@ const handelChangesUploadFile = (e) => {
                         <option>5</option>
                       </select>
                       {errors.Replacement && (
-                  <span className="text-danger text-left mt-2 ml-2">
+                  <span className="text-left text-errors mt-2 ml-2">
                     {errors.Replacement}</span>)}                     
                      </CardText>
                   </CardBody>
@@ -511,7 +514,7 @@ const handelChangesUploadFile = (e) => {
                       style={{ width: "100%" }}
                     ></textarea>
                           {errors.Remarks && (
-                  <span className="text-danger text-left mt-2 ml-2">
+                  <span className="text-errors text-left mt-2 ml-2">
                     {errors.Remarks}</span>)} 
                   </CardText>
                 </CardBody>
@@ -535,7 +538,7 @@ const handelChangesUploadFile = (e) => {
          <p className="info-text"><HiInformationCircle/> Max File Size 1 MB</p>
 		 <label>{errorUpload}</label>
                         {errors.Attchments && (
-                  <span className="text-danger text-left mt-2 ml-2">
+                  <span className="text-errors text-left mt-2 ml-2">
                     {errors.Attchments}</span>)}
                 </CardBody>
               </Card>
@@ -556,7 +559,6 @@ const handelChangesUploadFile = (e) => {
            { leavePost=="edit"  && <button
                 className="btn submit-btn mx-2 "
                 type="submit"
-                // onClick={()=>updateLeavePost(searchEmployee.id)}
               
               >
                 edit

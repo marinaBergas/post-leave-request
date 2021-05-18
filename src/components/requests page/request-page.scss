@@ -18,7 +18,7 @@ $icon-color-table:#24298F;
     }
     @media (max-width:575.98px) {
         font-size: 1.7em !important;
-           width:18px !important;
+           width:15px !important;
            padding: 0px;
            margin: 0px;
     }
@@ -52,6 +52,7 @@ $icon-color-table:#24298F;
     @media (max-width:768px) {
     width: 85% !important;
     vertical-align: inherit;
+    margin-left: 14px;
     }
    
 }
@@ -87,16 +88,22 @@ $icon-color-table:#24298F;
     @media (max-width:767.98px) {
         font-size:2.4em !important;
         text-align: right;
-        width: 520px !important;
+        width: 510px !important;
     }
     
     @media (max-width:575.98px) {
         font-size:2em !important;
-        width: 380px !important;
+        width: 260px !important;
         text-align: right;
     }
     .edit-icon-table{
         vertical-align: text-top;
         color:$icon-color-table ;
     }
+}
+.post-leave-request {
+    h5{
+        font-size: 0.8em !important;
+    }
+    
 }

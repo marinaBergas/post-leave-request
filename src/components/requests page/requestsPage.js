@@ -19,6 +19,7 @@ import "./request-page.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router";
 import { setLeavePost } from "../../redux/Employee.action";
+import './request-page.scss'
 const mapState = ({ employee }) => ({
     currentEmployee: employee.currentEmployee
   });
