@@ -76,7 +76,22 @@ const PostLeaveForm = ({text}) => {
       };
       const response = await fetch(`http://localhost:8000/employees/${id}`, requestOptions);
       const data = await response.json();
+      if(Object.keys(Validation(values)).length===0&& 
+  expectedLeavingDate&&
+   expectedRejoiningDate&&expectedEndDate&&address&&searchEmployee)
+   {
+   const {
+  
+       radio1,
+        radio2,
+        stLeaveType,
+        GuarantorSelect,
+        Replacement,Remarks,Attchments,
+        expectedLeavingDate,expectedRejoiningDate
+   } = values;
+
   }
+}
   
   const fetchLeavePost = async(id)=>{
       const res = await fetch (`http://localhost:8000/employees/${id}`)
@@ -87,7 +102,7 @@ const PostLeaveForm = ({text}) => {
 
 
 
-  const onSubmit = (e) => {
+const onSubmit = (e) => {
    
 setErrors(Validation(values));
 setIsSubmmitting(true);
@@ -137,7 +152,9 @@ const {
 useEffect(() => {
   isSubmmitting && setErrors(Validation(values));
 }, [values])
-
+const onCancel=()=>{
+  history.push("/");
+}
 
 const handelChanges = (e) => {
   let newValues ={
@@ -333,7 +350,8 @@ const handelChangesUploadFile = (e) => {
               </div>
               {errors.stLeaveType && (
                   <span className="text-left text-errors mt-2 ml-2">
-                    {errors.stLeaveType}</span>)}        </div>
+                    {errors.stLeaveType}</span>)}        
+                    </div>
               <label className="col-md-4 text-capitalize text-form-right align-self-center">
                 no. of days
               </label>
@@ -546,7 +564,7 @@ const handelChangesUploadFile = (e) => {
           </div>
           <div className="row justify-content-center text-center">
             <div className="col-md-4">
-              <div className="btn cancel-btn text-secondary mx-2 px-2">
+              <div className="btn cancel-btn text-secondary mx-2 px-2  " onClick={onCancel}>
                 Cancel
               </div>
             { leavePost=="submit"&&<button
@@ -559,6 +577,7 @@ const handelChangesUploadFile = (e) => {
            { leavePost=="edit"  && <button
                 className="btn submit-btn mx-2 "
                 type="submit"
+                onClick={updateLeavePost}
               
               >
                 edit

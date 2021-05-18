@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentEmployee } from "../../redux/Employee.action";
+import { setCurrentEmployee, setSearchEmployee } from "../../redux/Employee.action";
 import photo from "../../assets/image/g1.jpg";
 import { useTable, usePagination } from "react-table";
 import employees from "../../data/db.json";
+import { RiEditBoxLine } from "react-icons/ri";
+import { setLeavePost } from "../../redux/Employee.action";
 import "./request.scss";
+import { useHistory } from "react-router";
 
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
+ 
 });
 const Requests = (props) => {
   const { currentEmployee } = useSelector(mapState);
-  console.log("currentEmployee", currentEmployee);
+ 
+  const history = useHistory();
   const dispatch = useDispatch();
   const data = React.useMemo(
     () => employees["employees"],
@@ -100,6 +105,11 @@ const Requests = (props) => {
     }
     fetchData();
   }, []);
+  const handlePushEdit = (employee) => {
+    history.push("/form");
+    dispatch (setLeavePost("edit"))
+    dispatch(setSearchEmployee(employee))
+  };
 
   return (
     <>
@@ -130,6 +140,10 @@ const Requests = (props) => {
               <td>{employee.code}</td>
               <td style={{ width: "18%" }} className="overflow-hidden">
                 {employee.name}
+                <RiEditBoxLine onClick={()=>{
+                  handlePushEdit(employee)
+
+                  }} className=" edit-icon mr-1" />
               </td>
               <td style={{ width: "15%" }}>{employee.jobTitle}</td>
               <td>{employee.salaryProfile}</td>

@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Switch,Route } from 'react-router-dom';
 
 import './App.scss';
 import FormFieldset from './components/form-fieldset/FormFieldset';
-import RequestsPage from './components/requests page/RequestsPage';
+import RequestsPage from './components/requests page/requestsPage';
 
 
 
