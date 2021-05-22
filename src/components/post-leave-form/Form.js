@@ -68,7 +68,8 @@ const PostLeaveForm = ({text}) => {
   
     const  updateLeavePost= async(id) =>{
       const leavePostToggle = await fetchLeavePost(id);
-      const updateLeavePost = {...searchEmployee,...values}
+      console.log("values",values)
+      const updateLeavePost = {...searchEmployee,...values,expectedLeavingDate,expectedRejoiningDate}
       const requestOptions = {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -170,7 +171,7 @@ const {
   stLeaveType,
   GuarantorSelect,
   Replacement,
-  Remarks,Attchments
+  Remarks,Attchments,expectedLeavingDate,expectedRejoiningDate
 } = values;
 }
 };
@@ -194,7 +195,7 @@ const handelChangesUploadFile = (e) => {
   stLeaveType,
   GuarantorSelect,
   Replacement,
-  Remarks,Attchments
+  Remarks,Attchments,
   } = values
 }
   
@@ -577,7 +578,7 @@ const handelChangesUploadFile = (e) => {
            { leavePost=="edit"  && <button
                 className="btn submit-btn mx-2 "
                 type="submit"
-                onClick={updateLeavePost}
+                onClick={()=>{updateLeavePost(searchEmployee.id)}}
               
               >
                 edit
