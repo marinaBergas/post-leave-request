@@ -32,7 +32,7 @@ const FormFieldset = () => {
                 <h5>Request No.</h5>
                 </div> 
             </legend>
-                <div className="row">
+                <div className="row m-0">
                     <div className="col-lg-9 col-xs-12">
                         <FormSearch/>
                         <EmployeeInformation/>
