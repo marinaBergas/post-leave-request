@@ -9,10 +9,10 @@ function App() {
     <div className="App">
       <RequestsPage />
       <Router>
-        <switch>
+        <Switch>
           <Route path="/form" exact component={FormFieldset} />
           <Route path="/" exact component={RequestsPage} />
-        </switch>
+        </Switch>
       </Router>
     </div>
   );
