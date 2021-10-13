@@ -7,10 +7,11 @@ import RequestsPage from "./components/requests page/requestsPage";
 function App() {
   return (
     <div className="App">
+      <RequestsPage />
       <Router>
-        <Route path="/" exact component={RequestsPage} />
         <switch>
           <Route path="/form" exact component={FormFieldset} />
+          <Route path="/" exact component={RequestsPage} />
         </switch>
       </Router>
     </div>
