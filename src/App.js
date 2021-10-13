@@ -8,10 +8,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route path="/form" exact component={FormFieldset} />
-          <Route path="/" exact component={RequestsPage} />
-        </Switch>
+        <Route path="/form" exact component={FormFieldset} />
+        <Route path="/" exact component={RequestsPage} />
       </Router>
     </div>
   );
