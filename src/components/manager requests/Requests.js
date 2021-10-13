@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentEmployee, setSearchEmployee } from "../../redux/Employee.action";
+import {
+  setCurrentEmployee,
+  setSearchEmployee,
+} from "../../redux/Employee.action";
 import photo from "../../assets/image/g1.jpg";
 import { useTable, usePagination } from "react-table";
-import employees from "../../data/db.json";
+import employees from "../../db.json";
 import { RiEditBoxLine } from "react-icons/ri";
 import { setLeavePost } from "../../redux/Employee.action";
 import "./request.scss";
@@ -12,11 +15,10 @@ import { useHistory } from "react-router";
 
 const mapState = ({ employee }) => ({
   currentEmployee: employee.currentEmployee,
- 
 });
 const Requests = (props) => {
   const { currentEmployee } = useSelector(mapState);
- 
+
   const history = useHistory();
   const dispatch = useDispatch();
   const data = React.useMemo(
@@ -84,11 +86,7 @@ const Requests = (props) => {
   useEffect(() => {
     goForward(0);
   }, [currentEmployee]);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-  } = useTable(
+  const { getTableProps, getTableBodyProps, headerGroups } = useTable(
     {
       columns,
       data,
@@ -99,7 +97,9 @@ const Requests = (props) => {
   );
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("http://localhost:8000/employees");
+      const res = await fetch(
+        "https://my-json-server.typicode.com/marinaBergas/post-leave-request/employees"
+      );
       const data = await res.json();
       dispatch(setCurrentEmployee(data));
     }
@@ -107,8 +107,8 @@ const Requests = (props) => {
   }, []);
   const handlePushEdit = (employee) => {
     history.push("/form");
-    dispatch (setLeavePost("edit"))
-    dispatch(setSearchEmployee(employee))
+    dispatch(setLeavePost("edit"));
+    dispatch(setSearchEmployee(employee));
   };
 
   return (
@@ -121,7 +121,10 @@ const Requests = (props) => {
               {...headerGroup.getHeaderGroupProps()}
             >
               {headerGroup.headers.map((column) => (
-                <th className="text-capitalize header-col" {...column.getHeaderProps()}>
+                <th
+                  className="text-capitalize header-col"
+                  {...column.getHeaderProps()}
+                >
                   {column.render("Header")}
                 </th>
               ))}
@@ -140,10 +143,12 @@ const Requests = (props) => {
               <td>{employee.code}</td>
               <td style={{ width: "18%" }} className="overflow-hidden">
                 {employee.name}
-                <RiEditBoxLine onClick={()=>{
-                  handlePushEdit(employee)
-
-                  }} className=" edit-icon mr-1" />
+                <RiEditBoxLine
+                  onClick={() => {
+                    handlePushEdit(employee);
+                  }}
+                  className=" edit-icon mr-1"
+                />
               </td>
               <td style={{ width: "15%" }}>{employee.jobTitle}</td>
               <td>{employee.salaryProfile}</td>
